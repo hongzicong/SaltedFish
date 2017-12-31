@@ -46,8 +46,14 @@ public class TodoViewHolder extends RecyclerView.ViewHolder{
     }
 
     private void initTaskData(){
-        boolean isEqual=true;
         StringBuffer time=new StringBuffer();
+        if(mTask.isEveryDay()){
+            time.append("每日任务");
+            endTime.setText(time);
+            taskName.setText(mTask.getName());
+            return;
+        }
+        boolean isEqual=true;
         if(mTask.getEndTime().get(Calendar.YEAR)!=Calendar.getInstance().get(Calendar.YEAR)){
             time.append(mTask.getEndTime().get(Calendar.YEAR));
             time.append("年");

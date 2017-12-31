@@ -24,6 +24,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:text="Show"
+            android:textStyle="bold"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:fitsSystemWindows="true"/>

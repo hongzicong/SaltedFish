@@ -15,6 +15,7 @@ public class Task {
     private boolean isComplete;
     private String name;
     private boolean isDetailTime=false;
+    private boolean isEveryDay=false;
 
     public Task(int id, String detail,Calendar endTime, boolean isComplete, String name) {
         this.id = id;
@@ -70,5 +71,13 @@ public class Task {
 
     public void setDetailTime(boolean detailTime) {
         isDetailTime = detailTime;
+    }
+
+    public boolean isEveryDay() {
+        return isEveryDay;
+    }
+
+    public void setEveryDay(boolean everyDay) {
+        isEveryDay = everyDay;
     }
 }
