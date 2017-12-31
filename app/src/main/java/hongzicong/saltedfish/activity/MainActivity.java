@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     protected void initBottomNavigationBar(){
         mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         mBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
-        mBottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.show_icon,"曾经").setActiveColorResource(R.color.show_color))
+        mBottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.show_icon,"Show").setActiveColorResource(R.color.show_color))
                 .addItem(new BottomNavigationItem(R.drawable.todo_icon,"TODO").setActiveColorResource(R.color.todo_color))
-                .addItem(new BottomNavigationItem(R.drawable.set_icon,"设置").setActiveColorResource(R.color.set_color))
+                .addItem(new BottomNavigationItem(R.drawable.set_icon,"Setting").setActiveColorResource(R.color.set_color))
                 .setFirstSelectedPosition(1)
                 .initialise();
         mBottomNavigationBar.setAutoHideEnabled(false);
