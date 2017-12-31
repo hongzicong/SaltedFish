@@ -14,6 +14,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import hongzicong.saltedfish.R;
+import hongzicong.saltedfish.adapter.TableViewAdapter;
+import hongzicong.saltedfish.model.DateDatas;
+import hongzicong.saltedfish.view.TableView;
 
 public class ShowFragment extends Fragment {
 
@@ -21,6 +24,9 @@ public class ShowFragment extends Fragment {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+
+    @BindView(R.id.table_view)
+    TableView mTableView;
 
     public static ShowFragment newInstance() {
         ShowFragment fragment = new ShowFragment();
@@ -37,6 +43,7 @@ public class ShowFragment extends Fragment {
         View v=inflater.inflate(R.layout.fragment_show, container, false);
         mUnbinder= ButterKnife.bind(this,v);
         initToolbar();
+        initTableView();
         return v;
     }
 
@@ -49,6 +56,13 @@ public class ShowFragment extends Fragment {
     private void initToolbar(){
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    private void initTableView(){
+        DateDatas dateDatas=new DateDatas();
+        TableViewAdapter tableViewAdapter=new TableViewAdapter(dateDatas);
+        tableViewAdapter.setCurrentDay(200);
+        mTableView.setAdapter(tableViewAdapter);
     }
 
 }

@@ -16,4 +16,11 @@
     <color name="toolbar_color">#81C7D4</color>
     <color name="background">#EBEBEB</color>
 
+    <color name="empty_contri">#E1DFCE</color>
+    <color name="fill_1_contri">#81C7D4</color>
+    <color name="fill_2_contri">#7DB9DE</color>
+    <color name="fill_3_contri">#58B2DC</color>
+    <color name="fill_4_contri">#2EA9DF</color>
+    <color name="fill_5_contri">#3A8FB7</color>
+    <color name="fill_6_contri">#1E88A8</color>
 </resources>
