@@ -22,11 +22,15 @@ public class TableView extends View {
 
     protected TableViewAdapter mAdapter;
 
-    private int itemWidth = 100;
-    private int itemHeight = 100;
-    private int itemSpace = 20;
-    private int rightTextPadding=100;
-    private int topTextPadding=100;
+    private int itemWidth = 94;
+    private int itemHeight = 94;
+    private int textSize=73;
+    private int totalSize=120;
+    private int daySize=120;
+    private int itemSpace = 18;
+    private int rightTextPadding=0;
+    private int topTextPadding=120;
+    private int bottomTextPadding=300;
     private RectF rectF;
 
     private Paint paintEmpty = new Paint();
@@ -80,7 +84,7 @@ public class TableView extends View {
             column = mAdapter.getColumnCount();
         }
         int measureWidth = (column == 0 ? 0 : column * (itemWidth + itemSpace) - itemSpace) + getPaddingLeft() + getPaddingRight()+rightTextPadding;
-        int measureHeight = (row == 0 ? 0 : row * (itemHeight + itemSpace) - itemSpace) + getPaddingTop() + getPaddingBottom()+topTextPadding ;
+        int measureHeight = (row == 0 ? 0 : row * (itemHeight + itemSpace) - itemSpace) + getPaddingTop() + getPaddingBottom()+topTextPadding+bottomTextPadding ;
 
         int mWidth = widthMode == MeasureSpec.EXACTLY ? MeasureSpec.getSize(widthMeasureSpec) : measureWidth;
         int mHeight = heightMode == MeasureSpec.EXACTLY ? MeasureSpec.getSize(heightMeasureSpec) : measureHeight;
@@ -92,13 +96,20 @@ public class TableView extends View {
         super.onDraw(canvas);
         //裁剪画布
         canvas.clipRect(getPaddingLeft(), getPaddingTop(), getRight()- getPaddingRight(), getBottom() - getPaddingBottom());
-        drawText(canvas,"M");
-        drawText(canvas,"W");
-        drawText(canvas,"F");
+        //pixel 为单位
         if (mAdapter != null) {
             final int columnCount = mAdapter.getColumnCount();
             final int rowCount = mAdapter.getRowCount();
             final int currDay=mAdapter.getCurrentDay();
+
+            paintText.setTextSize(textSize);
+            paintText.setAntiAlias(true);
+            paintText.setTextAlign(Paint.Align.CENTER);
+            paintText.setColor(ContextCompat.getColor(getContext(),R.color.week_text));
+            drawText(canvas,"M",paintText,rightTextPadding+getPaddingLeft()+itemWidth + itemSpace+itemWidth/2,90);
+            drawText(canvas,"W",paintText,rightTextPadding+getPaddingLeft()+3*(itemWidth + itemSpace)+itemWidth/2,90);
+            drawText(canvas,"F",paintText,rightTextPadding+getPaddingLeft()+5*(itemWidth + itemSpace)+itemWidth/2,90);
+
             int tempDay=0;
             for (int week = 0; week < rowCount; ++week) {
                 for (int day = 0; day < columnCount; ++day,++tempDay) {
@@ -113,7 +124,7 @@ public class TableView extends View {
                     final int level = mAdapter.getLevel(Util.getDay(week,day));
                     final Paint paintByLevel = getPaintByLevel(level);
 
-                    drawItem(rectF, canvas,paintByLevel,  level);
+                    drawItem(rectF, canvas,paintByLevel, level);
 
                 }
             }
@@ -145,8 +156,8 @@ public class TableView extends View {
         canvas.drawCircle((rectF.left + rectF.right) / 2,(rectF.top + rectF.bottom) / 2, Math.min(itemWidth, itemHeight) / 2, paintByLevel);
     }
 
-    private void drawText(Canvas canvas,String text){
-        //canvas.drawText(text,,,paintText);
+    private void drawText(Canvas canvas,String text,Paint paint,final float x,final float y){
+        canvas.drawText(text,x,y,paint);
     }
 
     public void setAdapter(TableViewAdapter adapter) {
