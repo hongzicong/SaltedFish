@@ -9,3 +9,4 @@
 
 
 # demo图
+<img src="https://github.com/hongzicong/SaltedFish/raw/master/Screenshots/show.png" width = "360" alt="show界面" align=center />
