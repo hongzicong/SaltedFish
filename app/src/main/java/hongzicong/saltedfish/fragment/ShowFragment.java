@@ -61,7 +61,7 @@ public class ShowFragment extends Fragment {
     private void initTableView(){
         DateDatas dateDatas=new DateDatas();
         TableViewAdapter tableViewAdapter=new TableViewAdapter(dateDatas);
-        tableViewAdapter.setCurrentDay(200);
+        tableViewAdapter.setCurrentDay(60);
         mTableView.setAdapter(tableViewAdapter);
     }
 

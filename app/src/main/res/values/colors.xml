@@ -23,4 +23,8 @@
     <color name="fill_4_contri">#2EA9DF</color>
     <color name="fill_5_contri">#3A8FB7</color>
     <color name="fill_6_contri">#1E88A8</color>
+
+    <color name="week_text">#828282</color>
+    <color name="month_text">#828282</color>
+    <color name="bottom_text">#E0828282</color>
 </resources>

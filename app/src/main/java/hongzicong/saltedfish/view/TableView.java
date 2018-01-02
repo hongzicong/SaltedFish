@@ -24,13 +24,15 @@ public class TableView extends View {
 
     private int itemWidth = 94;
     private int itemHeight = 94;
-    private int textSize=73;
+    private int textSize=60;
+    private int monthSize=55;
     private int totalSize=120;
     private int daySize=120;
     private int itemSpace = 18;
-    private int rightTextPadding=0;
-    private int topTextPadding=120;
-    private int bottomTextPadding=300;
+    private int rightTextPadding=130;
+    private int leftTextPadding=40;
+    private int topTextPadding=140;
+    private int bottomTextPadding=260;
     private RectF rectF;
 
     private Paint paintEmpty = new Paint();
@@ -83,7 +85,7 @@ public class TableView extends View {
             row = mAdapter.getRowCount();
             column = mAdapter.getColumnCount();
         }
-        int measureWidth = (column == 0 ? 0 : column * (itemWidth + itemSpace) - itemSpace) + getPaddingLeft() + getPaddingRight()+rightTextPadding;
+        int measureWidth = (column == 0 ? 0 : column * (itemWidth + itemSpace) - itemSpace) + getPaddingLeft() + getPaddingRight()+leftTextPadding+rightTextPadding;
         int measureHeight = (row == 0 ? 0 : row * (itemHeight + itemSpace) - itemSpace) + getPaddingTop() + getPaddingBottom()+topTextPadding+bottomTextPadding ;
 
         int mWidth = widthMode == MeasureSpec.EXACTLY ? MeasureSpec.getSize(widthMeasureSpec) : measureWidth;
@@ -102,13 +104,54 @@ public class TableView extends View {
             final int rowCount = mAdapter.getRowCount();
             final int currDay=mAdapter.getCurrentDay();
 
+            //编写星期
             paintText.setTextSize(textSize);
             paintText.setAntiAlias(true);
             paintText.setTextAlign(Paint.Align.CENTER);
             paintText.setColor(ContextCompat.getColor(getContext(),R.color.week_text));
-            drawText(canvas,"M",paintText,rightTextPadding+getPaddingLeft()+itemWidth + itemSpace+itemWidth/2,90);
-            drawText(canvas,"W",paintText,rightTextPadding+getPaddingLeft()+3*(itemWidth + itemSpace)+itemWidth/2,90);
-            drawText(canvas,"F",paintText,rightTextPadding+getPaddingLeft()+5*(itemWidth + itemSpace)+itemWidth/2,90);
+            drawText(canvas,"M",paintText,rightTextPadding+getPaddingLeft()+itemWidth + itemSpace+itemWidth/2,100);
+            drawText(canvas,"W",paintText,rightTextPadding+getPaddingLeft()+3*(itemWidth + itemSpace)+itemWidth/2,100);
+            drawText(canvas,"F",paintText,rightTextPadding+getPaddingLeft()+5*(itemWidth + itemSpace)+itemWidth/2,100);
+
+            //编写月份
+            paintText.setTextSize(monthSize);
+            paintText.setAntiAlias(true);
+            paintText.setTextAlign(Paint.Align.RIGHT);
+            paintText.setColor(ContextCompat.getColor(getContext(),R.color.month_text));
+            drawText(canvas,"Jan",paintText,rightTextPadding-30,getPaddingTop()+topTextPadding+monthSize+5);
+            if(currDay>334) {
+                drawText(canvas, "Dec", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+44*(itemHeight + itemSpace)+5);
+            }
+            if(currDay>304){
+                drawText(canvas, "Nov", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+40*(itemHeight + itemSpace)+5);
+            }
+            if(currDay>273){
+                drawText(canvas, "Oct", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+36*(itemHeight + itemSpace)+5);
+            }
+            if(currDay>243){
+                drawText(canvas, "Sep", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+32*(itemHeight + itemSpace)+5);
+            }
+            if(currDay>212){
+                drawText(canvas, "Aug", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+28*(itemHeight + itemSpace)+5);
+            }
+            if(currDay>181){
+                drawText(canvas, "Jul", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+24*(itemHeight + itemSpace)+5);
+            }
+            if(currDay>151){
+                drawText(canvas, "Jun", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+20*(itemHeight + itemSpace)+5);
+            }
+            if(currDay>120){
+                drawText(canvas, "May", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+16*(itemHeight + itemSpace)+5);
+            }
+            if(currDay>90){
+                drawText(canvas, "Apr", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+12*(itemHeight + itemSpace)+5 );
+            }
+            if(currDay>59){
+                drawText(canvas, "Mar", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+8*(itemHeight + itemSpace)+5);
+            }
+            if(currDay>31){
+                drawText(canvas, "Feb", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+4*(itemHeight + itemSpace)+5);
+            }
 
             int tempDay=0;
             for (int week = 0; week < rowCount; ++week) {
@@ -116,9 +159,9 @@ public class TableView extends View {
                     if(tempDay==currDay){
                         return;
                     }
-                    rectF.left = (day == 0 ? 0 : day * (itemWidth + itemSpace)) + getPaddingLeft()+rightTextPadding;
+                    rectF.left = day * (itemWidth + itemSpace) + getPaddingLeft()+rightTextPadding;
                     rectF.right = rectF.left + itemWidth ;
-                    rectF.top = (week == 0 ? 0 : week * (itemHeight + itemSpace)) +  + getPaddingTop()+topTextPadding;
+                    rectF.top = week * (itemHeight + itemSpace) + getPaddingTop()+topTextPadding;
                     rectF.bottom = rectF.top + itemHeight;
 
                     final int level = mAdapter.getLevel(Util.getDay(week,day));
