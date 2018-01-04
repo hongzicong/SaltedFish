@@ -3,14 +3,11 @@ package hongzicong.saltedfish.adapter;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
 
 import java.util.List;
 
@@ -37,7 +34,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
-        View itemView=layoutInflater.inflate(R.layout.list_item,parent,false);
+        View itemView=layoutInflater.inflate(R.layout.item_todo_list,parent,false);
         return new TodoViewHolder(itemView,mTaskList.get(viewType));
     }
 

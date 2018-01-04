@@ -27,4 +27,7 @@
     <color name="week_text">#828282</color>
     <color name="month_text">#828282</color>
     <color name="bottom_text">#E0828282</color>
+
+    <color name="black_semi_transparent">#B2000000</color>
+
 </resources>
