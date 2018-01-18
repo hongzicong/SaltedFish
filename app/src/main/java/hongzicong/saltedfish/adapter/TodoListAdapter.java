@@ -12,8 +12,14 @@ import android.view.animation.AnimationUtils;
 import java.util.List;
 
 import hongzicong.saltedfish.R;
-import hongzicong.saltedfish.model.Task;
-import hongzicong.saltedfish.viewholder.TodoViewHolder;
+import hongzicong.saltedfish.model.EveryDayTask;
+import hongzicong.saltedfish.model.OneDayTask;
+import hongzicong.saltedfish.utils.EveryDayDaoUtil;
+import hongzicong.saltedfish.utils.OneDayDaoUtil;
+import hongzicong.saltedfish.utils.UIUtils;
+import hongzicong.saltedfish.viewholder.TodoOnedayViewHolder;
+import hongzicong.saltedfish.viewholder.TodoTextViewHolder;
+import hongzicong.saltedfish.viewholder.TodoEverydayViewHolder;
 
 /**
  * Created by DELL-PC on 2017/12/31.
@@ -21,21 +27,58 @@ import hongzicong.saltedfish.viewholder.TodoViewHolder;
 
 public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private EveryDayDaoUtil everyDayDaoUtil=new EveryDayDaoUtil(UIUtils.getContext());
+    private OneDayDaoUtil oneDayDaoUtil=new OneDayDaoUtil(UIUtils.getContext());
+
     protected Context mContext;
-    private List<Task> mTaskList;
+    private List<EveryDayTask> mEverydayTaskList;
+    private List<OneDayTask> mOnedayTaskList;
     private Animation mAnimation;
 
-    public TodoListAdapter(Fragment fragment,List<Task> taskList){
+    public TodoListAdapter(Fragment fragment,List<EveryDayTask> everydayTaskList,List<OneDayTask> onedayTaskList){
         mContext=fragment.getContext();
         mAnimation= AnimationUtils.loadAnimation(mContext, R.anim.list_anim);
-        mTaskList=taskList;
+        this.mOnedayTaskList=onedayTaskList;
+        this.mEverydayTaskList=everydayTaskList;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent,final int viewType) {
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
-        View itemView=layoutInflater.inflate(R.layout.item_todo_list,parent,false);
-        return new TodoViewHolder(itemView,mTaskList.get(viewType));
+        if(viewType==0){
+            View itemView=layoutInflater.inflate(R.layout.item_text,parent,false);
+            return new TodoTextViewHolder(itemView,"每日任务");
+        }
+        else if(viewType==mOnedayTaskList.size()+1){
+            View itemView=layoutInflater.inflate(R.layout.item_text,parent,false);
+            return new TodoTextViewHolder(itemView,"养成习惯");
+        }
+        else if(viewType>0&&viewType<=mOnedayTaskList.size()){
+            View itemView=layoutInflater.inflate(R.layout.item_todo_list,parent,false);
+            TodoOnedayViewHolder todoOnedayViewHolder= new TodoOnedayViewHolder(itemView,mOnedayTaskList.get(viewType-1));
+            todoOnedayViewHolder.setOnDeleteListener(new TodoOnedayViewHolder.OnDeleteListener() {
+                @Override
+                public void deleteTask() {
+                    oneDayDaoUtil.deleteOneDayTask(mOnedayTaskList.get(viewType-1));
+                    mOnedayTaskList.remove(viewType-1);
+                    notifyDataSetChanged();
+                }
+            });
+            return todoOnedayViewHolder;
+        }
+        else{
+            View itemView=layoutInflater.inflate(R.layout.item_todo_list,parent,false);
+            TodoEverydayViewHolder todoEverydayViewHolder= new TodoEverydayViewHolder(itemView,mEverydayTaskList.get(viewType-mOnedayTaskList.size()-2));
+            todoEverydayViewHolder.setOnDeleteListener(new TodoEverydayViewHolder.OnDeleteListener() {
+                @Override
+                public void deleteTask() {
+                    everyDayDaoUtil.deleteEveryDayTask(mEverydayTaskList.get(viewType-mOnedayTaskList.size()-2));
+                    mEverydayTaskList.remove(viewType-mOnedayTaskList.size()-2);
+                    notifyDataSetChanged();
+                }
+            });
+            return todoEverydayViewHolder;
+        }
     }
 
     @Override
@@ -45,7 +88,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return mTaskList.size();
+        return mEverydayTaskList.size()+2+mOnedayTaskList.size();
     }
 
     @Override

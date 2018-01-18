@@ -1,30 +1,32 @@
 package hongzicong.saltedfish.viewholder;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.activity.DetailActivity;
+import hongzicong.saltedfish.model.EveryDayTask;
+import hongzicong.saltedfish.model.OneDayTask;
 import hongzicong.saltedfish.model.Task;
 import hongzicong.saltedfish.utils.UIUtils;
 
 /**
- * Created by DELL-PC on 2017/12/31.
+ * Created by Dv00 on 2018/1/5.
  */
 
-public class TodoViewHolder extends RecyclerView.ViewHolder{
+public class TodoOnedayViewHolder extends RecyclerView.ViewHolder{
 
-    private Task mTask;
+    private OneDayTask mTask;
 
     @BindView(R.id.task_end_time)
     TextView endTime;
@@ -41,27 +43,34 @@ public class TodoViewHolder extends RecyclerView.ViewHolder{
     @BindView(R.id.item_delete)
     TextView deleteButton;
 
-    @OnClick(R.id.item_detail)
-    public void Click(){
-        Intent intent=new Intent(UIUtils.getContext(), DetailActivity.class);
-        UIUtils.getContext().startActivity(intent);
+    @BindDrawable(R.drawable.round_rectangle)
+    Drawable textBackground;
+
+    private OnDeleteListener onDeleteListener;
+
+    public interface OnDeleteListener{
+        void deleteTask();
     }
 
-    public TodoViewHolder(View itemView,Task task){
+    public void setOnDeleteListener(OnDeleteListener onDeleteListener){
+        this.onDeleteListener=onDeleteListener;
+    }
+
+    public TodoOnedayViewHolder(View itemView, OneDayTask task){
         super(itemView);
         ButterKnife.bind(this,itemView);
         mTask=task;
         initTaskData();
     }
 
+    @OnClick(R.id.item_detail)
+    public void Click(){
+        Intent intent=new Intent(UIUtils.getContext(), DetailActivity.class);
+        UIUtils.getContext().startActivity(intent);
+    }
+
     private void initTaskData(){
         StringBuffer time=new StringBuffer();
-        if(mTask.isEveryDay()){
-            time.append("每日任务");
-            endTime.setText(time);
-            taskName.setText(mTask.getName());
-            return;
-        }
         boolean isEqual=true;
         if(mTask.getEndTime().get(Calendar.YEAR)!=Calendar.getInstance().get(Calendar.YEAR)){
             time.append(mTask.getEndTime().get(Calendar.YEAR));
@@ -88,7 +97,7 @@ public class TodoViewHolder extends RecyclerView.ViewHolder{
             time.append("日");
             isEqual=false;
         }
-        if(mTask.isDetailTime()){
+        if(mTask.getIsDetailTime()){
             if(mTask.getEndTime().get(Calendar.HOUR_OF_DAY)<10){
                 time.append("0");
             }

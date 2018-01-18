@@ -23,8 +23,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -44,8 +44,8 @@
             android:id="@+id/image_button_minus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginRight="1dp"
+            android:layout_weight="1"
             android:background="@android:color/white"
             android:padding="30dp"
             android:src="@drawable/minus" />
@@ -54,25 +54,32 @@
             android:id="@+id/text_view_date"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:layout_centerInParent="true"
+            android:layout_weight="3"
             android:background="@android:color/white"
             android:gravity="center"
-            android:text="2018年12月31日"
+            android:text="1"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:text="天"
             android:textSize="20dp" />
 
         <ImageButton
             android:id="@+id/image_button_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="1dp"
+            android:layout_weight="1"
             android:background="@android:color/white"
             android:padding="30dp"
             android:src="@drawable/add" />
 
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>

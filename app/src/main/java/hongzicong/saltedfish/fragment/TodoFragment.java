@@ -99,6 +99,11 @@ public class TodoFragment extends Fragment {
     private void initDataFromDB(){
         everydayTaskList=everyDayDaoUtil.queryAllEveryDayTask();
         onedayTaskList=oneDayDaoUtil.queryAllOneDayTask();
+        Calendar calendar=Calendar.getInstance();
+        OneDayTask task=new OneDayTask(null,"数据结构复习",calendar.getTimeInMillis(),false,"数据结构复习",true);
+        onedayTaskList.add(task);
+        task=new OneDayTask(null,"Java课项目PPT",calendar.getTimeInMillis(),false,"Java课项目PPT",true);
+        onedayTaskList.add(task);
     }
 
     private void setOnAllListener(){
