@@ -1,28 +1,14 @@
 package hongzicong.saltedfish.adapter;
 
-import android.accessibilityservice.AccessibilityService;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
-import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.OnClickListener;
-import com.orhanobut.dialogplus.OnItemClickListener;
-import com.orhanobut.dialogplus.ViewHolder;
-
-import java.util.Calendar;
 import java.util.Date;
 
-import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.fragment.DatePickerFragment;
 import hongzicong.saltedfish.model.EveryDayTask;
 import hongzicong.saltedfish.utils.EveryDayDaoUtil;

@@ -55,6 +55,7 @@
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
+                android:id="@+id/text_view_total_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|bottom"
@@ -66,6 +67,7 @@
                 android:typeface="serif"/>
 
             <TextView
+                android:id="@+id/text_view_total_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
