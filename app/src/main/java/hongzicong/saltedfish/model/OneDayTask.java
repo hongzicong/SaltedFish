@@ -13,6 +13,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by Dv00 on 2018/1/4.
  */
 
+//用来记录每日任务详情的object
 @Entity
 public class OneDayTask {
 

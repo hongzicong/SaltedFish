@@ -26,10 +26,10 @@ public class AddNumViewHolder extends RecyclerView.ViewHolder{
     TextView dateView;
 
     @BindView(R.id.image_button_add)
-    ImageButton plusImage;
+    TextView plusImage;
 
     @BindView(R.id.image_button_minus)
-    ImageButton minusImage;
+    TextView minusImage;
 
     public AddNumViewHolder(LayoutInflater layoutInflater, ViewGroup viewGroup){
         super(layoutInflater.inflate(R.layout.item_num,viewGroup,false));

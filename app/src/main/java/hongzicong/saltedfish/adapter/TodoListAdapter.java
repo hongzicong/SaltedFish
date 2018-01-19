@@ -33,11 +33,9 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     protected Context mContext;
     private List<EveryDayTask> mEverydayTaskList;
     private List<OneDayTask> mOnedayTaskList;
-    private Animation mAnimation;
 
     public TodoListAdapter(Fragment fragment,List<EveryDayTask> everydayTaskList,List<OneDayTask> onedayTaskList){
         mContext=fragment.getContext();
-        mAnimation= AnimationUtils.loadAnimation(mContext, R.anim.list_anim);
         this.mOnedayTaskList=onedayTaskList;
         this.mEverydayTaskList=everydayTaskList;
     }
@@ -56,25 +54,34 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         else if(viewType>0&&viewType<=mOnedayTaskList.size()){
             View itemView=layoutInflater.inflate(R.layout.item_todo_list,parent,false);
             TodoOnedayViewHolder todoOnedayViewHolder= new TodoOnedayViewHolder(itemView,mOnedayTaskList.get(viewType-1));
+
             todoOnedayViewHolder.setOnDeleteListener(new TodoOnedayViewHolder.OnDeleteListener() {
                 @Override
                 public void deleteTask() {
                     oneDayDaoUtil.deleteOneDayTask(mOnedayTaskList.get(viewType-1));
                     mOnedayTaskList.remove(viewType-1);
-                    notifyDataSetChanged();
+
+                    //更新RecyclerView的列表，并显示动画
+                    notifyItemRemoved(viewType-1);
                 }
             });
             return todoOnedayViewHolder;
         }
         else{
             View itemView=layoutInflater.inflate(R.layout.item_todo_list,parent,false);
-            TodoEverydayViewHolder todoEverydayViewHolder= new TodoEverydayViewHolder(itemView,mEverydayTaskList.get(viewType-mOnedayTaskList.size()-2));
+            TodoEverydayViewHolder todoEverydayViewHolder= new TodoEverydayViewHolder(itemView);
+
+            //将它与模型层绑定在一起
+            todoEverydayViewHolder.bind(mEverydayTaskList.get(viewType-mOnedayTaskList.size()-2));
+
             todoEverydayViewHolder.setOnDeleteListener(new TodoEverydayViewHolder.OnDeleteListener() {
                 @Override
                 public void deleteTask() {
                     everyDayDaoUtil.deleteEveryDayTask(mEverydayTaskList.get(viewType-mOnedayTaskList.size()-2));
                     mEverydayTaskList.remove(viewType-mOnedayTaskList.size()-2);
-                    notifyDataSetChanged();
+
+                    //更新RecyclerView的列表，并显示动画
+                    notifyItemRemoved(viewType-mOnedayTaskList.size()-2);
                 }
             });
             return todoEverydayViewHolder;

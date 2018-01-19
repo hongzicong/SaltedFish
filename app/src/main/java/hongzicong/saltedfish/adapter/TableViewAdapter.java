@@ -13,11 +13,12 @@ public class TableViewAdapter {
     private int rowCount;
     private int currentDay;
 
-    //begin with 1
+    //日期从1开始
     public int getCurrentDay() {
         return currentDay;
     }
 
+    //每天更新一次
     public void setCurrentDay(int currentDay) {
         this.currentDay = currentDay;
     }

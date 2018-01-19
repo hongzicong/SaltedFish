@@ -36,6 +36,7 @@ import hongzicong.saltedfish.utils.UIUtils;
 
 public class TodoFragment extends Fragment {
 
+    //建立与数据库之间的工具联系
     private EveryDayDaoUtil everyDayDaoUtil=new EveryDayDaoUtil(UIUtils.getContext());
     private OneDayDaoUtil oneDayDaoUtil=new OneDayDaoUtil(UIUtils.getContext());
 
@@ -75,7 +76,7 @@ public class TodoFragment extends Fragment {
 
         initToolbar();
 
-        initDataFromDB();
+        updateDataFromDB();
 
         mTodoListAdapter=new TodoListAdapter(this,everydayTaskList,onedayTaskList);
         mRecyclerView.setAdapter(mTodoListAdapter);
@@ -91,22 +92,21 @@ public class TodoFragment extends Fragment {
         mUnbinder.unbind();
     }
 
+    //初始化toolbar
     private void initToolbar(){
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
-    private void initDataFromDB(){
+    //从数据库中更新数据
+    private void updateDataFromDB(){
         everydayTaskList=everyDayDaoUtil.queryAllEveryDayTask();
         onedayTaskList=oneDayDaoUtil.queryAllOneDayTask();
-        Calendar calendar=Calendar.getInstance();
-        OneDayTask task=new OneDayTask(null,"数据结构复习",calendar.getTimeInMillis(),false,"数据结构复习",true);
-        onedayTaskList.add(task);
-        task=new OneDayTask(null,"Java课项目PPT",calendar.getTimeInMillis(),false,"Java课项目PPT",true);
-        onedayTaskList.add(task);
     }
 
+    //设置floatingactionbutton的监听器
     private void setOnAllListener(){
+        //每日任务的浮动按钮，且需要知道有没有成功创建
         mAddTodoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +114,7 @@ public class TodoFragment extends Fragment {
                 startActivityForResult(intent,todoReqeustCode);
             }
         });
+        //习惯的浮动按钮，且需要知道有没有成功创建
         mAddHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +128,8 @@ public class TodoFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean returnCode = data.getBooleanExtra("returnCode",false);
         long id=data.getLongExtra("returnId",-1);
+
+        //当成功创建时，从数据库重新读取信息，但是不改变原来的list，否则会出错
         if(returnCode==true){
             switch (requestCode){
                 case todoReqeustCode:
@@ -136,8 +139,9 @@ public class TodoFragment extends Fragment {
                     everydayTaskList.add(everyDayDaoUtil.queryEveryDayTaskById(id));
                     break;
             }
-            mTodoListAdapter.notifyDataSetChanged();
+            mTodoListAdapter.notifyItemInserted(everydayTaskList.size()-1);
             mFloatingActionsMenu.close(false);
         }
     }
+
 }
