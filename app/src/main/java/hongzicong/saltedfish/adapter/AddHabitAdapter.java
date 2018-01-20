@@ -33,9 +33,6 @@ public class AddHabitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private AddNumViewHolder mAddNumViewHolder;
 
     private Context mContext;
-    private final int addRowCount=4;
-
-    private static final int REQUEST_DATE=0;
 
     public AddHabitAdapter(Activity activity){
         mContext=activity;
@@ -113,6 +110,15 @@ public class AddHabitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public EveryDayTask getTaskFromViewHolder(){
         EveryDayTask everyDayTask=new EveryDayTask(null,mAddDetailViewHolder.getText(),mAddDateViewHolder.getEndTime(),false,mAddNameViewHolder.getText(),false,mAddNumViewHolder.getNumOfDay());
         return everyDayTask;
+    }
+
+    public boolean isLegal(){
+        if(mAddNameViewHolder.getText().isEmpty()){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
 
