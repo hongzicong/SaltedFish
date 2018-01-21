@@ -30,7 +30,7 @@ public class EveryDayTaskDao extends AbstractDao<EveryDayTask, Long> {
         public final static Property IsComplete = new Property(3, boolean.class, "isComplete", false, "IS_COMPLETE");
         public final static Property Name = new Property(4, String.class, "name", false, "NAME");
         public final static Property IsDetailTime = new Property(5, boolean.class, "isDetailTime", false, "IS_DETAIL_TIME");
-        public final static Property Count = new Property(6, int.class, "count", false, "COUNT");
+        public final static Property Combos = new Property(6, int.class, "combos", false, "COMBOS");
     }
 
 
@@ -52,7 +52,7 @@ public class EveryDayTaskDao extends AbstractDao<EveryDayTask, Long> {
                 "\"IS_COMPLETE\" INTEGER NOT NULL ," + // 3: isComplete
                 "\"NAME\" TEXT," + // 4: name
                 "\"IS_DETAIL_TIME\" INTEGER NOT NULL ," + // 5: isDetailTime
-                "\"COUNT\" INTEGER NOT NULL );"); // 6: count
+                "\"COMBOS\" INTEGER NOT NULL );"); // 6: combos
     }
 
     /** Drops the underlying database table. */
@@ -82,7 +82,7 @@ public class EveryDayTaskDao extends AbstractDao<EveryDayTask, Long> {
             stmt.bindString(5, name);
         }
         stmt.bindLong(6, entity.getIsDetailTime() ? 1L: 0L);
-        stmt.bindLong(7, entity.getCount());
+        stmt.bindLong(7, entity.getCombos());
     }
 
     @Override
@@ -106,7 +106,7 @@ public class EveryDayTaskDao extends AbstractDao<EveryDayTask, Long> {
             stmt.bindString(5, name);
         }
         stmt.bindLong(6, entity.getIsDetailTime() ? 1L: 0L);
-        stmt.bindLong(7, entity.getCount());
+        stmt.bindLong(7, entity.getCombos());
     }
 
     @Override
@@ -123,7 +123,7 @@ public class EveryDayTaskDao extends AbstractDao<EveryDayTask, Long> {
             cursor.getShort(offset + 3) != 0, // isComplete
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // name
             cursor.getShort(offset + 5) != 0, // isDetailTime
-            cursor.getInt(offset + 6) // count
+            cursor.getInt(offset + 6) // combos
         );
         return entity;
     }
@@ -136,7 +136,7 @@ public class EveryDayTaskDao extends AbstractDao<EveryDayTask, Long> {
         entity.setIsComplete(cursor.getShort(offset + 3) != 0);
         entity.setName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setIsDetailTime(cursor.getShort(offset + 5) != 0);
-        entity.setCount(cursor.getInt(offset + 6));
+        entity.setCombos(cursor.getInt(offset + 6));
      }
     
     @Override

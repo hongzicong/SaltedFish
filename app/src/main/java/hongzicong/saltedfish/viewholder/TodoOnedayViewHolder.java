@@ -29,8 +29,6 @@ import hongzicong.saltedfish.utils.UIUtils;
 
 public class TodoOnedayViewHolder extends AbstractTodoViewHolder{
 
-    private OneDayTask mTask;
-
     private StringBuffer time;
 
     @BindView(R.id.task_end_time)
@@ -53,23 +51,6 @@ public class TodoOnedayViewHolder extends AbstractTodoViewHolder{
     public void Detail(){
         Intent intent=new Intent(UIUtils.getContext(), DetailActivity.class);
         UIUtils.getContext().startActivity(intent);
-    }
-
-    @OnClick(R.id.check_box)
-    public void Complete(){
-        if(checkBox.isChecked()){
-            taskName.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
-            taskName.getPaint().setAntiAlias(true);
-        }else {
-            taskName.getPaint().setFlags(0);
-        }
-        taskName.setText(mTask.getName());
-        onCompleteListener.completeTask();
-    }
-
-    @OnClick(R.id.item_delete)
-    public void Delete(){
-        onDeleteListener.deleteTask();
     }
 
     private void initTaskData(){
@@ -110,6 +91,12 @@ public class TodoOnedayViewHolder extends AbstractTodoViewHolder{
             }
             time.append(mTask.getEndTime().get(Calendar.MINUTE));
         }
+
+        if(mTask.getIsComplete()){
+            checkBox.setChecked(true);
+            setMiddleLine(true);
+        }
+
         endTime.setText(time);
         taskName.setText(mTask.getName());
     }

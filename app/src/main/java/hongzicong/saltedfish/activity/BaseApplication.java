@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import com.ping.greendao.gen.DaoMaster;
+import com.ping.greendao.gen.DaoSession;
+
 import hongzicong.saltedfish.db.DBManager;
 
 /**
@@ -15,6 +18,7 @@ public class BaseApplication extends Application {
     private static Context mContext;
     private static Thread  mMainThread;
     private static Handler mMainHandler;
+
     public DBManager dbManager;
 
     public static Thread getMainThread() {

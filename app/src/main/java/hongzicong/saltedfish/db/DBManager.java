@@ -38,6 +38,7 @@ public class DBManager {
 
     /**
      * 判断是否有存在数据库，如果没有则创建
+     * 应用了单例模式
      * @return
      */
     public DaoMaster getDaoMaster(){

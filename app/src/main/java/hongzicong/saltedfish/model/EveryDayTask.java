@@ -12,7 +12,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 //用来记录习惯的object
 @Entity
-public class EveryDayTask {
+public class EveryDayTask extends Task{
 
     @Id(autoincrement = true)
     private Long id;
@@ -24,18 +24,18 @@ public class EveryDayTask {
     //是否需要每天定时提醒
     private boolean isDetailTime=false;
 
-    private int count=0;
+    private int combos=0;
 
-    @Generated(hash = 1362192693)
+    @Generated(hash = 1296861129)
     public EveryDayTask(Long id, String detail, long mEndTime, boolean isComplete,
-            String name, boolean isDetailTime, int count) {
+            String name, boolean isDetailTime, int combos) {
         this.id = id;
         this.detail = detail;
         this.mEndTime = mEndTime;
         this.isComplete = isComplete;
         this.name = name;
         this.isDetailTime = isDetailTime;
-        this.count = count;
+        this.combos = combos;
     }
 
     @Generated(hash = 1597007745)
@@ -82,12 +82,12 @@ public class EveryDayTask {
         this.isDetailTime = isDetailTime;
     }
 
-    public int getCount() {
-        return this.count;
+    public int getCombos() {
+        return this.combos;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setCombos(int combos) {
+        this.combos = combos;
     }
 
     public long getMEndTime() {
@@ -100,6 +100,12 @@ public class EveryDayTask {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Calendar getEndTime(){
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTimeInMillis(mEndTime);
+        return calendar;
     }
 
 }

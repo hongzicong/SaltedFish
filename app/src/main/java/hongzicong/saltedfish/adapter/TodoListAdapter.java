@@ -49,6 +49,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onItemMoved(int fromPosition, int toPosition) {
+        //todo
         if(fromPosition==0||fromPosition==mOnedayTaskList.size()+1){
             return;
         }
@@ -96,12 +97,10 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
         else if(viewType==VIEW_TYPE_TASK){
             View itemView=layoutInflater.inflate(R.layout.item_todo_list,parent,false);
-            final TodoOnedayViewHolder todoOnedayViewHolder= new TodoOnedayViewHolder(itemView);
-            return todoOnedayViewHolder;
+           return new TodoOnedayViewHolder(itemView);
         } else if(viewType==VIEW_TYPE_HABIT){
             View itemView=layoutInflater.inflate(R.layout.item_todo_list,parent,false);
-            final TodoEverydayViewHolder todoEverydayViewHolder= new TodoEverydayViewHolder(itemView);
-            return todoEverydayViewHolder;
+            return new TodoEverydayViewHolder(itemView);
         }
         return null;
     }
@@ -124,7 +123,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     boolean isComplete=mEverydayTaskList.get(position-mOnedayTaskList.size()-2).getIsComplete();
                     mEverydayTaskList.get(position-mOnedayTaskList.size()-2).setIsComplete(!isComplete);
                     everyDayDaoUtil.updateEveryDayTask(mEverydayTaskList.get(position-mOnedayTaskList.size()-2));
-
                 }
             });
         } else if(holder instanceof TodoOnedayViewHolder){
