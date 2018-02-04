@@ -39,14 +39,46 @@
         android:layoutAnimation="@anim/anim_listview_item"
         android:layout_below="@id/toolbar"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add"
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/multiple_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:src="@drawable/plus_icon"/>
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="19dp"
+        app:menu_labels_style="@style/menu_labels_style"
+        app:menu_labels_margin="10dp"
+        app:menu_labels_position="left"
+        app:menu_labels_textSize="18dp"
+        app:menu_colorNormal="#DB4D6D"
+        app:menu_colorPressed="#D0104C"
+        app:menu_colorRipple="#D0104C"
+        app:menu_fab_label="返回">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_add_habit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/smile"
+            app:fab_label="养成习惯"
+            app:fab_colorNormal="#DB4D6D"
+            app:fab_colorPressed="#D0104C"
+            app:fab_colorRipple="#DB4D6D"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_add_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/habit"
+            app:fab_label="添加计划"
+            app:fab_colorNormal="#DB4D6D"
+            app:fab_colorPressed="#D0104C"
+            app:fab_colorRipple="#D0104C"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
+
 
 </RelativeLayout>
 

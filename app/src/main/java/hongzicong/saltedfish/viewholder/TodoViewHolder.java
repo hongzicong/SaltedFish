@@ -1,5 +1,6 @@
 package hongzicong.saltedfish.viewholder;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +12,11 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hongzicong.saltedfish.R;
+import hongzicong.saltedfish.activity.DetailActivity;
 import hongzicong.saltedfish.model.Task;
+import hongzicong.saltedfish.utils.UIUtils;
 
 /**
  * Created by DELL-PC on 2017/12/31.
@@ -37,12 +41,17 @@ public class TodoViewHolder extends RecyclerView.ViewHolder{
     @BindView(R.id.item_delete)
     TextView deleteButton;
 
+    @OnClick(R.id.item_detail)
+    public void Click(){
+        Intent intent=new Intent(UIUtils.getContext(), DetailActivity.class);
+        UIUtils.getContext().startActivity(intent);
+    }
+
     public TodoViewHolder(View itemView,Task task){
         super(itemView);
         ButterKnife.bind(this,itemView);
         mTask=task;
         initTaskData();
-        setOnAllListener();
     }
 
     private void initTaskData(){
@@ -91,27 +100,6 @@ public class TodoViewHolder extends RecyclerView.ViewHolder{
         }
         endTime.setText(time);
         taskName.setText(mTask.getName());
-    }
-
-    private void setOnAllListener(){
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //todo
-            }
-        });
-        completeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //todo
-            }
-        });
-        detailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //todo
-            }
-        });
     }
 
 }
