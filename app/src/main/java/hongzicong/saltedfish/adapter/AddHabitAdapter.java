@@ -16,6 +16,7 @@ import com.orhanobut.dialogplus.ViewHolder;
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.viewholder.AddDateViewHolder;
+import hongzicong.saltedfish.viewholder.AddNumViewHolder;
 import hongzicong.saltedfish.viewholder.AddTextViewHolder;
 
 /**
@@ -27,6 +28,7 @@ public class AddHabitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private AddTextViewHolder mAddNameViewHolder;
     private AddTextViewHolder mAddDetailViewHolder;
     private AddDateViewHolder mAddDateViewHolder;
+    private AddNumViewHolder mAddNumViewHolder;
 
     private Context mContext;
     private final int addRowCount=4;
@@ -48,7 +50,7 @@ public class AddHabitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         else if(viewType==1){
             View itemView=layoutInflater.inflate(R.layout.item_edit_text,parent,false);
             if(mAddDetailViewHolder==null){
-                mAddDetailViewHolder=new AddTextViewHolder(layoutInflater,parent,"想养成这个习惯的原因","习惯原因");
+                mAddDetailViewHolder=new AddTextViewHolder(layoutInflater,parent,"想养成这个习惯的原因","为了什么而开始");
             }
             return mAddDetailViewHolder;
         }
@@ -65,15 +67,17 @@ public class AddHabitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 .setGravity(Gravity.CENTER)
                                 .create();
                         dialogPlus.show();
-                        InputMethodManager inputMethodManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-                        inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     }
                 });
             }
             return mAddDateViewHolder;
         }
         else if(viewType==3){
-            return null;
+            View itemView=layoutInflater.inflate(R.layout.item_date,parent,false);
+            if(mAddNumViewHolder==null){
+                mAddNumViewHolder=new AddNumViewHolder(layoutInflater,parent);
+            }
+            return mAddNumViewHolder;
         }
         return null;
     }
@@ -85,7 +89,7 @@ public class AddHabitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 
     @Override
