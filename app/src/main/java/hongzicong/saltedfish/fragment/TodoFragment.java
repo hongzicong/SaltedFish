@@ -27,12 +27,23 @@ import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.activity.AddHabitActivity;
 import hongzicong.saltedfish.activity.AddTaskActivity;
 import hongzicong.saltedfish.adapter.TodoListAdapter;
+import hongzicong.saltedfish.model.EveryDayTask;
+import hongzicong.saltedfish.model.OneDayTask;
 import hongzicong.saltedfish.model.Task;
+import hongzicong.saltedfish.utils.EveryDayDaoUtil;
+import hongzicong.saltedfish.utils.OneDayDaoUtil;
+import hongzicong.saltedfish.utils.UIUtils;
 
 public class TodoFragment extends Fragment {
 
+    private EveryDayDaoUtil everyDayDaoUtil=new EveryDayDaoUtil(UIUtils.getContext());
+    private OneDayDaoUtil oneDayDaoUtil=new OneDayDaoUtil(UIUtils.getContext());
+
     private Unbinder mUnbinder;
     private TodoListAdapter mTodoListAdapter;
+
+    public static final int todoReqeustCode=1;
+    public static final int habitRequestCode=2;
 
     @BindView(R.id.list_todo)
     RecyclerView mRecyclerView;
@@ -49,13 +60,13 @@ public class TodoFragment extends Fragment {
     @BindView(R.id.fab_add_todo)
     FloatingActionButton mAddTodoButton;
 
-    private List<Task> taskList;
+    private List<EveryDayTask> everydayTaskList;
+    private List<OneDayTask> onedayTaskList;
 
     public static TodoFragment newInstance(){
         TodoFragment todoFragment=new TodoFragment();
         return todoFragment;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,9 +74,10 @@ public class TodoFragment extends Fragment {
         mUnbinder= ButterKnife.bind(this,v);
 
         initToolbar();
-        initData();
 
-        mTodoListAdapter=new TodoListAdapter(this,taskList);
+        initDataFromDB();
+
+        mTodoListAdapter=new TodoListAdapter(this,everydayTaskList,onedayTaskList);
         mRecyclerView.setAdapter(mTodoListAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -84,24 +96,9 @@ public class TodoFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
-    private void initData(){
-        taskList=new ArrayList();
-        Calendar date=Calendar.getInstance();
-        Task task=new Task(0,"健身",date,false,"健身");
-        task.setEveryDay(true);
-        taskList.add(task);
-        task=new Task(1,"数据结构复习",date,false,"数据结构复习");
-        taskList.add(task);
-        task=new Task(2,"Java课项目PPT",date,false,"Java课项目PPT");
-        taskList.add(task);
-        task=new Task(3,"每周软导博客",date,false,"每周软导博客");
-        taskList.add(task);
-        task=new Task(4,"微软小英单词任务",date,false,"微软小英单词");
-        task.setEveryDay(true);
-        taskList.add(task);
-        task=new Task(5,"两天一篇论文",date,false,"两天一篇论文");
-        task.setEveryDay(true);
-        taskList.add(task);
+    private void initDataFromDB(){
+        everydayTaskList=everyDayDaoUtil.queryAllEveryDayTask();
+        onedayTaskList=oneDayDaoUtil.queryAllOneDayTask();
     }
 
     private void setOnAllListener(){
@@ -109,17 +106,33 @@ public class TodoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(), AddTaskActivity.class);
-                getActivity().startActivity(intent);
+                startActivityForResult(intent,todoReqeustCode);
             }
         });
         mAddHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),AddHabitActivity.class);
-                getActivity().startActivity(intent);
+                startActivityForResult(intent,habitRequestCode);
             }
         });
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        boolean returnCode = data.getBooleanExtra("returnCode",false);
+        long id=data.getLongExtra("returnId",-1);
+        if(returnCode==true){
+            switch (requestCode){
+                case todoReqeustCode:
+                    onedayTaskList.add(oneDayDaoUtil.queryOneDayTaskById(id));
+                    break;
+                case habitRequestCode:
+                    everydayTaskList.add(everyDayDaoUtil.queryEveryDayTaskById(id));
+                    break;
+            }
+            mTodoListAdapter.notifyDataSetChanged();
+            mFloatingActionsMenu.close(false);
+        }
+    }
 }
