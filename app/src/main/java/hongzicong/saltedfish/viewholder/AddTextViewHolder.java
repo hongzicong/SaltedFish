@@ -38,4 +38,8 @@ public class AddTextViewHolder extends RecyclerView.ViewHolder {
         editText.setHint(mTextHint);
     }
 
+    public String getText(){
+        return editText.getText().toString();
+    }
+
 }

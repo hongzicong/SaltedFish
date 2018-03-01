@@ -12,11 +12,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
+        android:minHeight="?android:attr/actionBarSize"
         android:background="@color/toolbar_color"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:elevation="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,6 +31,13 @@
             android:fitsSystemWindows="true"/>
 
     </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>

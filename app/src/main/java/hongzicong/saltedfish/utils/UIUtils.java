@@ -4,6 +4,7 @@ package hongzicong.saltedfish.utils;
  * Created by Dv00 on 2018/1/4.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Handler;

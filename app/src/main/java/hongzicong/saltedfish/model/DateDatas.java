@@ -1,6 +1,5 @@
 package hongzicong.saltedfish.model;
 
-
 import java.util.List;
 
 /**

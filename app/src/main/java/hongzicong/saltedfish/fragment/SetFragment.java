@@ -4,6 +4,7 @@ package hongzicong.saltedfish.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +22,8 @@ public class SetFragment extends Fragment {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    public SetFragment() {
-        // Required empty public constructor
-    }
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
 
     public static SetFragment newInstance(){
         SetFragment setFragment=new SetFragment();

@@ -14,6 +14,7 @@ import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
 import hongzicong.saltedfish.R;
+import hongzicong.saltedfish.model.EveryDayTask;
 import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.viewholder.AddDateViewHolder;
 import hongzicong.saltedfish.viewholder.AddNumViewHolder;
@@ -35,6 +36,11 @@ public class AddHabitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public AddHabitAdapter(Activity activity){
         mContext=activity;
+    }
+
+    public EveryDayTask getTaskFromViewHolder(){
+        EveryDayTask everyDayTask=new EveryDayTask(null,mAddDetailViewHolder.getText(),mAddDateViewHolder.getEndTime(),false,mAddNameViewHolder.getText(),false,mAddNumViewHolder.getNumOfDay());
+        return everyDayTask;
     }
 
     @Override
