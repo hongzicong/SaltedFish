@@ -10,6 +10,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by Dv00 on 2018/1/4.
  */
 
+//用来记录习惯的object
 @Entity
 public class EveryDayTask {
 
@@ -19,6 +20,8 @@ public class EveryDayTask {
     private long mEndTime;
     private boolean isComplete;
     private String name;
+
+    //是否需要每天定时提醒
     private boolean isDetailTime=false;
 
     private int count=0;

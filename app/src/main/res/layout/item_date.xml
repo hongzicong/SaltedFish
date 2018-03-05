@@ -40,15 +40,16 @@
         android:focusable="true"
         android:focusableInTouchMode="true" >
 
-        <ImageButton
-            android:id="@+id/image_button_minus"
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/image_button_minus"
+            android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:layout_marginRight="1dp"
-            android:background="@android:color/white"
-            android:padding="30dp"
-            android:src="@drawable/minus" />
+            android:text="-"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:background="@android:color/white" />
 
         <TextView
             android:id="@+id/text_view_date"
@@ -61,15 +62,16 @@
             android:text="2018年12月31日"
             android:textSize="20dp" />
 
-        <ImageButton
-            android:id="@+id/image_button_add"
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/image_button_add"
+            android:layout_marginLeft="2dp"
             android:layout_weight="1"
-            android:layout_marginLeft="1dp"
-            android:background="@android:color/white"
-            android:padding="30dp"
-            android:src="@drawable/add" />
+            android:text="+"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:background="@android:color/white" />
 
     </LinearLayout>
 

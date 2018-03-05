@@ -59,11 +59,9 @@ public class TodoEverydayViewHolder extends RecyclerView.ViewHolder{
         this.onDeleteListener=onDeleteListener;
     }
 
-    public TodoEverydayViewHolder(View itemView, EveryDayTask task){
+    public TodoEverydayViewHolder(View itemView){
         super(itemView);
         ButterKnife.bind(this,itemView);
-        mTask=task;
-        initTaskData();
     }
 
     @OnClick(R.id.item_detail)
@@ -77,7 +75,8 @@ public class TodoEverydayViewHolder extends RecyclerView.ViewHolder{
         onDeleteListener.deleteTask();
     }
 
-    private void initTaskData(){
+    public void bind(EveryDayTask task){
+        mTask=task;
         StringBuffer time=new StringBuffer();
         endTime.setBackground(textBackground);
         time.append("× "+mTask.getCount());

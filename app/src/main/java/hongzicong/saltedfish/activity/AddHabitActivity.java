@@ -17,8 +17,6 @@ import hongzicong.saltedfish.utils.UIUtils;
 
 public class AddHabitActivity extends BaseAddActivity {
 
-    private EveryDayDaoUtil everyDayDaoUtil=new EveryDayDaoUtil(UIUtils.getContext());
-    private EveryDayTask everyDayTask;
     private AddHabitAdapter addHabitAdapter=new AddHabitAdapter(this);
 
     @BindView(R.id.recycler_view)
@@ -29,9 +27,12 @@ public class AddHabitActivity extends BaseAddActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+
         initToolBar("Add Habit");
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(addHabitAdapter);
+
     }
 
     @Override
@@ -47,16 +48,13 @@ public class AddHabitActivity extends BaseAddActivity {
                 return true;
             case R.id.action_ok:
                 intent=new Intent();
-                everyDayTask=addHabitAdapter.getTaskFromViewHolder();
-                everyDayDaoUtil.insertEveryDayTask(everyDayTask);
                 intent.putExtra("returnCode",true);
-                intent.putExtra("returnId",everyDayTask.getId());
+                intent.putExtra("returnId", addHabitAdapter.addInToDB());
                 this.setResult(TodoFragment.habitRequestCode,intent);
                 finish();
                 return true;
         }
         return false;
     }
-
 
 }

@@ -44,6 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:background="@android:color/white"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
             android:hint="习惯"
             android:textSize="15dp" />
 

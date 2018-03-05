@@ -1,5 +1,6 @@
 package hongzicong.saltedfish.viewholder;
 
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -29,15 +31,21 @@ import hongzicong.saltedfish.utils.UIUtils;
 public class AddDateViewHolder extends RecyclerView.ViewHolder  {
 
     private String name;
+    private SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
 
     @BindView(R.id.image_button_add)
-    ImageButton plusImage;
+    TextView plusImage;
 
     @BindView(R.id.image_button_minus)
-    ImageButton minusImage;
+    TextView minusImage;
 
     @BindView(R.id.text_view_date)
     TextView dateTextView;
+
+    @BindView(R.id.text_view)
+    TextView nameTextView;
+
+    private Date endTime;
 
     private OnChangeDateListener mOnChangeDateListener;
 
@@ -53,20 +61,20 @@ public class AddDateViewHolder extends RecyclerView.ViewHolder  {
         super(layoutInflater.inflate(R.layout.item_date,viewGroup,false));
         ButterKnife.bind(this,itemView);
         this.name=name;
+        this.endTime=new Date();
+        setEndTime(Calendar.getInstance().getTimeInMillis());
+        nameTextView.setText(this.name);
     }
 
     public long getEndTime(){
-        String dateString=dateTextView.getText().toString();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
-        Date date=new Date();
-        try{
-            date=simpleDateFormat.parse(dateString);
-        }catch (Exception e){
-            System.out.print(e);
-        }
         Calendar calendar=Calendar.getInstance();
-        calendar.setTime(date);
+        calendar.setTime(endTime);
         return calendar.getTimeInMillis();
+    }
+
+    public void setEndTime(long millisTime){
+        endTime.setTime(millisTime);
+        this.dateTextView.setText(simpleDateFormat.format(endTime));
     }
 
     @OnClick(R.id.text_view_date)
@@ -76,12 +84,18 @@ public class AddDateViewHolder extends RecyclerView.ViewHolder  {
 
     @OnClick(R.id.image_button_minus)
     public void minusDate(){
-
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(endTime);
+        calendar.add(Calendar.DATE,-1);
+        setEndTime(calendar.getTimeInMillis());
     }
 
     @OnClick(R.id.image_button_add)
     public void addDate(){
-
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(endTime);
+        calendar.add(Calendar.DATE,1);
+        setEndTime(calendar.getTimeInMillis());
     }
 
 }
