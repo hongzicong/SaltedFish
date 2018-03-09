@@ -1,14 +1,16 @@
 package hongzicong.saltedfish.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,9 +18,19 @@ import butterknife.Unbinder;
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.adapter.TableViewAdapter;
 import hongzicong.saltedfish.model.DateDatas;
+import hongzicong.saltedfish.utils.EveryDayDaoUtil;
+import hongzicong.saltedfish.utils.OneDayDaoUtil;
+import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.view.TableView;
 
 public class ShowFragment extends Fragment {
+
+    //建立与数据库之间的工具联系
+    private EveryDayDaoUtil everyDayDaoUtil=new EveryDayDaoUtil(UIUtils.getContext());
+    private OneDayDaoUtil oneDayDaoUtil=new OneDayDaoUtil(UIUtils.getContext());
+
+    private int totalDayNum;
+    private DateDatas dateDatas;
 
     private Unbinder mUnbinder;
 
@@ -27,6 +39,13 @@ public class ShowFragment extends Fragment {
 
     @BindView(R.id.table_view)
     TableView mTableView;
+
+    @BindView(R.id.text_view_total_day)
+    TextView totalDay;
+
+    @BindView(R.id.text_view_total_num)
+    TextView totalNum;
+
 
     public static ShowFragment newInstance() {
         ShowFragment fragment = new ShowFragment();
@@ -42,8 +61,16 @@ public class ShowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_show, container, false);
         mUnbinder= ButterKnife.bind(this,v);
+
+        Calendar calendar=Calendar.getInstance();
+        totalDayNum=calendar.get(Calendar.DATE);
+        dateDatas=new DateDatas(totalDayNum,everyDayDaoUtil.queryAllEveryDayTask(),oneDayDaoUtil.queryAllOneDayTask());
+
         initToolbar();
         initTableView();
+
+        totalDay.setText(totalDayNum+" days");
+        totalNum.setText(dateDatas.getTotalNum()+" total");
         return v;
     }
 
@@ -59,9 +86,8 @@ public class ShowFragment extends Fragment {
     }
 
     private void initTableView(){
-        DateDatas dateDatas=new DateDatas();
         TableViewAdapter tableViewAdapter=new TableViewAdapter(dateDatas);
-        tableViewAdapter.setCurrentDay(60);
+        tableViewAdapter.setCurrentDay(totalDayNum);
         mTableView.setAdapter(tableViewAdapter);
     }
 

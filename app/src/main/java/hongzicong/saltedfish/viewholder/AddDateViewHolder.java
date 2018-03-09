@@ -9,9 +9,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.ViewHolder;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import hongzicong.saltedfish.R;
@@ -86,7 +87,7 @@ public class TableView extends View {
             column = mAdapter.getColumnCount();
         }
         int measureWidth = (column == 0 ? 0 : column * (itemWidth + itemSpace) - itemSpace) + getPaddingLeft() + getPaddingRight()+leftTextPadding+rightTextPadding;
-        int measureHeight = (row == 0 ? 0 : row * (itemHeight + itemSpace) - itemSpace) + getPaddingTop() + getPaddingBottom()+topTextPadding+bottomTextPadding ;
+        int measureHeight = (row == 0 ? 0 : row * (itemHeight + itemSpace) - itemSpace) + getPaddingTop() + getPaddingBottom()+topTextPadding+bottomTextPadding;
 
         int mWidth = widthMode == MeasureSpec.EXACTLY ? MeasureSpec.getSize(widthMeasureSpec) : measureWidth;
         int mHeight = heightMode == MeasureSpec.EXACTLY ? MeasureSpec.getSize(heightMeasureSpec) : measureHeight;
