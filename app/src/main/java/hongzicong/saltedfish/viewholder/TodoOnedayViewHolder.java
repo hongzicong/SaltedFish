@@ -56,10 +56,13 @@ public class TodoOnedayViewHolder extends RecyclerView.ViewHolder{
         this.onDeleteListener=onDeleteListener;
     }
 
-    public TodoOnedayViewHolder(View itemView, OneDayTask task){
+    public TodoOnedayViewHolder(View itemView){
         super(itemView);
         ButterKnife.bind(this,itemView);
-        mTask=task;
+    }
+
+    public void bind(OneDayTask oneDayTask){
+        mTask=oneDayTask;
         initTaskData();
     }
 
@@ -67,6 +70,11 @@ public class TodoOnedayViewHolder extends RecyclerView.ViewHolder{
     public void Click(){
         Intent intent=new Intent(UIUtils.getContext(), DetailActivity.class);
         UIUtils.getContext().startActivity(intent);
+    }
+
+    @OnClick(R.id.item_delete)
+    public void Delete(){
+        onDeleteListener.deleteTask();
     }
 
     private void initTaskData(){
