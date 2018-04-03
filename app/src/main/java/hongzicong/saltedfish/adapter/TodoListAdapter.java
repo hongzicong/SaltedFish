@@ -61,9 +61,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             mEverydayTaskList.remove(position-mOnedayTaskList.size()-2);
         }
         notifyItemRemoved(position);
+        notifyItemRangeChanged(position,getItemCount()-position);
     }
-
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent,final int viewType) {
