@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 import hongzicong.saltedfish.R;
@@ -48,7 +49,25 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onItemMoved(int fromPosition, int toPosition) {
+        if(fromPosition==0||fromPosition==mOnedayTaskList.size()+1){
+            return;
+        }
+        if(fromPosition>0&&fromPosition<=mOnedayTaskList.size()&&toPosition>0&&toPosition<=mOnedayTaskList.size()){
+            if(fromPosition<toPosition){
+                for(int i=fromPosition; i<toPosition; i++){
+                    Collections.swap(mOnedayTaskList, i, i+1);
+                }
+            }
+            else{
+                for(int i=fromPosition; i > toPosition; i--){
+                    Collections.swap(mOnedayTaskList, i, i-1);
+                }
+            }
+            notifyItemMoved(fromPosition,toPosition);
+        }else if(fromPosition>0&&fromPosition<=mOnedayTaskList.size()&&toPosition>0&&toPosition<=mOnedayTaskList.size()){
 
+            notifyItemMoved(fromPosition,toPosition);
+        }
     }
 
     @Override
@@ -99,12 +118,29 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     onItemRemoved(position);
                 }
             });
+            ((TodoEverydayViewHolder) holder).setOnCompleteListener(new TodoEverydayViewHolder.OnCompleteListener() {
+                @Override
+                public void completeTask() {
+                    boolean isComplete=mEverydayTaskList.get(position-mOnedayTaskList.size()-2).getIsComplete();
+                    mEverydayTaskList.get(position-mOnedayTaskList.size()-2).setIsComplete(!isComplete);
+                    everyDayDaoUtil.updateEveryDayTask(mEverydayTaskList.get(position-mOnedayTaskList.size()-2));
+
+                }
+            });
         } else if(holder instanceof TodoOnedayViewHolder){
             ((TodoOnedayViewHolder) holder).bind(mOnedayTaskList.get(position-1));
             ((TodoOnedayViewHolder) holder).setOnDeleteListener(new TodoOnedayViewHolder.OnDeleteListener() {
                 @Override
                 public void deleteTask() {
                     onItemRemoved(position);
+                }
+            });
+            ((TodoOnedayViewHolder) holder).setOnCompleteListener(new TodoOnedayViewHolder.OnCompleteListener() {
+                @Override
+                public void completeTask() {
+                    boolean isComplete=mOnedayTaskList.get(position-1).getIsComplete();
+                    mOnedayTaskList.get(position-1).setIsComplete(!isComplete);
+                    oneDayDaoUtil.updateOneDayTask(mOnedayTaskList.get(position-1));
                 }
             });
         }

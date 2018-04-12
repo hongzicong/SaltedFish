@@ -2,10 +2,13 @@ package hongzicong.saltedfish.viewholder;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -24,37 +27,17 @@ import hongzicong.saltedfish.utils.UIUtils;
  * Created by Dv00 on 2018/1/5.
  */
 
-public class TodoOnedayViewHolder extends RecyclerView.ViewHolder{
+public class TodoOnedayViewHolder extends AbstractTodoViewHolder{
 
     private OneDayTask mTask;
+
+    private StringBuffer time;
 
     @BindView(R.id.task_end_time)
     TextView endTime;
 
-    @BindView(R.id.task_name)
-    TextView taskName;
-
-    @BindView(R.id.item_detail)
-    TextView detailButton;
-
-    @BindView(R.id.item_complete)
-    TextView completeButton;
-
-    @BindView(R.id.item_delete)
-    TextView deleteButton;
-
     @BindDrawable(R.drawable.round_rectangle)
     Drawable textBackground;
-
-    private OnDeleteListener onDeleteListener;
-
-    public interface OnDeleteListener{
-        void deleteTask();
-    }
-
-    public void setOnDeleteListener(OnDeleteListener onDeleteListener){
-        this.onDeleteListener=onDeleteListener;
-    }
 
     public TodoOnedayViewHolder(View itemView){
         super(itemView);
@@ -67,9 +50,21 @@ public class TodoOnedayViewHolder extends RecyclerView.ViewHolder{
     }
 
     @OnClick(R.id.item_detail)
-    public void Click(){
+    public void Detail(){
         Intent intent=new Intent(UIUtils.getContext(), DetailActivity.class);
         UIUtils.getContext().startActivity(intent);
+    }
+
+    @OnClick(R.id.check_box)
+    public void Complete(){
+        if(checkBox.isChecked()){
+            taskName.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
+            taskName.getPaint().setAntiAlias(true);
+        }else {
+            taskName.getPaint().setFlags(0);
+        }
+        taskName.setText(mTask.getName());
+        onCompleteListener.completeTask();
     }
 
     @OnClick(R.id.item_delete)
@@ -78,7 +73,7 @@ public class TodoOnedayViewHolder extends RecyclerView.ViewHolder{
     }
 
     private void initTaskData(){
-        StringBuffer time=new StringBuffer();
+        time=new StringBuffer();
         boolean isEqual=true;
         if(mTask.getEndTime().get(Calendar.YEAR)!=Calendar.getInstance().get(Calendar.YEAR)){
             time.append(mTask.getEndTime().get(Calendar.YEAR));

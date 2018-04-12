@@ -2,6 +2,7 @@ package hongzicong.saltedfish.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -72,8 +73,17 @@ public class TodoFragment extends Fragment {
         return todoFragment;
     }
 
+    //公共方法，为了让托管它们的activity调用
+    //Bundle用来保存状态
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    //View视图在onCreateView方法中生成
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //生成fragment的视图
         View v=inflater.inflate(R.layout.fragment_todo, container, false);
         mUnbinder= ButterKnife.bind(this,v);
 
