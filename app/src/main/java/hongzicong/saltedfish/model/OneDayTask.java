@@ -15,7 +15,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 //用来记录每日任务详情的object
 @Entity
-public class OneDayTask {
+public class OneDayTask extends Task{
 
     @Id(autoincrement = true)
     private Long id;
@@ -27,7 +27,7 @@ public class OneDayTask {
 
     @Generated(hash = 1512230442)
     public OneDayTask(Long id, String detail, long mEndTime, boolean isComplete,
-            String name, boolean isDetailTime) {
+                      String name, boolean isDetailTime) {
         this.id = id;
         this.detail = detail;
         this.mEndTime = mEndTime;

@@ -31,8 +31,6 @@ import hongzicong.saltedfish.utils.UIUtils;
 
 public class TodoEverydayViewHolder extends AbstractTodoViewHolder{
 
-    private EveryDayTask mTask;
-
     @BindView(R.id.task_end_time)
     TextView endTime;
 
@@ -50,32 +48,21 @@ public class TodoEverydayViewHolder extends AbstractTodoViewHolder{
         UIUtils.getContext().startActivity(intent);
     }
 
-    @OnClick(R.id.item_delete)
-    public void Delete(){
-        onDeleteListener.deleteTask();
-    }
-
-    @OnClick(R.id.check_box)
-    public void Complete(){
-        if(checkBox.isChecked()){
-            taskName.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
-            taskName.getPaint().setAntiAlias(true);
-        }else {
-            taskName.getPaint().setFlags(0);
-        }
-        taskName.setText(mTask.getName());
-        onCompleteListener.completeTask();
-    }
-
     public void bind(EveryDayTask task){
         mTask=task;
+
         StringBuffer time=new StringBuffer();
+
         endTime.setBackground(textBackground);
-        time.append("× "+mTask.getCount());
+        time.append("× "+((EveryDayTask)mTask).getCombos());
         endTime.setText(time);
         endTime.setTextSize(20);
 
         endTime.setTextColor(Color.WHITE);
+        if(mTask.getIsComplete()){
+            checkBox.setChecked(true);
+            setMiddleLine(true);
+        }
         taskName.setText(mTask.getName());
     }
 
