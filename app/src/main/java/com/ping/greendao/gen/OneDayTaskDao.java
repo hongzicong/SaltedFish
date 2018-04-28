@@ -26,10 +26,11 @@ public class OneDayTaskDao extends AbstractDao<OneDayTask, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Detail = new Property(1, String.class, "detail", false, "DETAIL");
-        public final static Property MEndTime = new Property(2, long.class, "mEndTime", false, "M_END_TIME");
-        public final static Property IsComplete = new Property(3, boolean.class, "isComplete", false, "IS_COMPLETE");
-        public final static Property Name = new Property(4, String.class, "name", false, "NAME");
-        public final static Property IsDetailTime = new Property(5, boolean.class, "isDetailTime", false, "IS_DETAIL_TIME");
+        public final static Property MBeginTime = new Property(2, long.class, "mBeginTime", false, "M_BEGIN_TIME");
+        public final static Property MEndTime = new Property(3, long.class, "mEndTime", false, "M_END_TIME");
+        public final static Property IsComplete = new Property(4, boolean.class, "isComplete", false, "IS_COMPLETE");
+        public final static Property Name = new Property(5, String.class, "name", false, "NAME");
+        public final static Property IsDetailTime = new Property(6, boolean.class, "isDetailTime", false, "IS_DETAIL_TIME");
     }
 
 
@@ -47,10 +48,11 @@ public class OneDayTaskDao extends AbstractDao<OneDayTask, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"ONE_DAY_TASK\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"DETAIL\" TEXT," + // 1: detail
-                "\"M_END_TIME\" INTEGER NOT NULL ," + // 2: mEndTime
-                "\"IS_COMPLETE\" INTEGER NOT NULL ," + // 3: isComplete
-                "\"NAME\" TEXT," + // 4: name
-                "\"IS_DETAIL_TIME\" INTEGER NOT NULL );"); // 5: isDetailTime
+                "\"M_BEGIN_TIME\" INTEGER NOT NULL ," + // 2: mBeginTime
+                "\"M_END_TIME\" INTEGER NOT NULL ," + // 3: mEndTime
+                "\"IS_COMPLETE\" INTEGER NOT NULL ," + // 4: isComplete
+                "\"NAME\" TEXT NOT NULL ," + // 5: name
+                "\"IS_DETAIL_TIME\" INTEGER NOT NULL );"); // 6: isDetailTime
     }
 
     /** Drops the underlying database table. */
@@ -72,14 +74,11 @@ public class OneDayTaskDao extends AbstractDao<OneDayTask, Long> {
         if (detail != null) {
             stmt.bindString(2, detail);
         }
-        stmt.bindLong(3, entity.getMEndTime());
-        stmt.bindLong(4, entity.getIsComplete() ? 1L: 0L);
- 
-        String name = entity.getName();
-        if (name != null) {
-            stmt.bindString(5, name);
-        }
-        stmt.bindLong(6, entity.getIsDetailTime() ? 1L: 0L);
+        stmt.bindLong(3, entity.getMBeginTime());
+        stmt.bindLong(4, entity.getMEndTime());
+        stmt.bindLong(5, entity.getIsComplete() ? 1L: 0L);
+        stmt.bindString(6, entity.getName());
+        stmt.bindLong(7, entity.getIsDetailTime() ? 1L: 0L);
     }
 
     @Override
@@ -95,14 +94,11 @@ public class OneDayTaskDao extends AbstractDao<OneDayTask, Long> {
         if (detail != null) {
             stmt.bindString(2, detail);
         }
-        stmt.bindLong(3, entity.getMEndTime());
-        stmt.bindLong(4, entity.getIsComplete() ? 1L: 0L);
- 
-        String name = entity.getName();
-        if (name != null) {
-            stmt.bindString(5, name);
-        }
-        stmt.bindLong(6, entity.getIsDetailTime() ? 1L: 0L);
+        stmt.bindLong(3, entity.getMBeginTime());
+        stmt.bindLong(4, entity.getMEndTime());
+        stmt.bindLong(5, entity.getIsComplete() ? 1L: 0L);
+        stmt.bindString(6, entity.getName());
+        stmt.bindLong(7, entity.getIsDetailTime() ? 1L: 0L);
     }
 
     @Override
@@ -115,10 +111,11 @@ public class OneDayTaskDao extends AbstractDao<OneDayTask, Long> {
         OneDayTask entity = new OneDayTask( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // detail
-            cursor.getLong(offset + 2), // mEndTime
-            cursor.getShort(offset + 3) != 0, // isComplete
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // name
-            cursor.getShort(offset + 5) != 0 // isDetailTime
+            cursor.getLong(offset + 2), // mBeginTime
+            cursor.getLong(offset + 3), // mEndTime
+            cursor.getShort(offset + 4) != 0, // isComplete
+            cursor.getString(offset + 5), // name
+            cursor.getShort(offset + 6) != 0 // isDetailTime
         );
         return entity;
     }
@@ -127,10 +124,11 @@ public class OneDayTaskDao extends AbstractDao<OneDayTask, Long> {
     public void readEntity(Cursor cursor, OneDayTask entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setDetail(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setMEndTime(cursor.getLong(offset + 2));
-        entity.setIsComplete(cursor.getShort(offset + 3) != 0);
-        entity.setName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setIsDetailTime(cursor.getShort(offset + 5) != 0);
+        entity.setMBeginTime(cursor.getLong(offset + 2));
+        entity.setMEndTime(cursor.getLong(offset + 3));
+        entity.setIsComplete(cursor.getShort(offset + 4) != 0);
+        entity.setName(cursor.getString(offset + 5));
+        entity.setIsDetailTime(cursor.getShort(offset + 6) != 0);
      }
     
     @Override

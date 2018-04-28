@@ -1,10 +1,16 @@
 package hongzicong.saltedfish.model;
 
+import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 
 import java.util.Calendar;
+import java.util.List;
+
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.NotNull;
+
+import hongzicong.saltedfish.db.BooleanConverter;
 
 /**
  * Created by Dv00 on 2018/1/4.
@@ -17,23 +23,31 @@ public class EveryDayTask extends Task{
     @Id(autoincrement = true)
     private Long id;
     private String detail;
+    private long mBeginTime;
     private long mEndTime;
     private boolean isComplete;
+
+    @NotNull
     private String name;
+
+    @Convert(columnType = String.class, converter = BooleanConverter.class)
+    private List<Boolean> keepClockList;
 
     //是否需要每天定时提醒
     private boolean isDetailTime=false;
-
     private int combos=0;
 
-    @Generated(hash = 1296861129)
-    public EveryDayTask(Long id, String detail, long mEndTime, boolean isComplete,
-            String name, boolean isDetailTime, int combos) {
+    @Generated(hash = 1084598152)
+    public EveryDayTask(Long id, String detail, long mBeginTime, long mEndTime,
+            boolean isComplete, @NotNull String name, List<Boolean> keepClockList,
+            boolean isDetailTime, int combos) {
         this.id = id;
         this.detail = detail;
+        this.mBeginTime = mBeginTime;
         this.mEndTime = mEndTime;
         this.isComplete = isComplete;
         this.name = name;
+        this.keepClockList = keepClockList;
         this.isDetailTime = isDetailTime;
         this.combos = combos;
     }
@@ -41,6 +55,7 @@ public class EveryDayTask extends Task{
     @Generated(hash = 1597007745)
     public EveryDayTask() {
     }
+
 
     public boolean getIsSomeDay(){
         return false;
@@ -106,6 +121,22 @@ public class EveryDayTask extends Task{
         Calendar calendar=Calendar.getInstance();
         calendar.setTimeInMillis(mEndTime);
         return calendar;
+    }
+
+    public long getMBeginTime() {
+        return this.mBeginTime;
+    }
+
+    public void setMBeginTime(long mBeginTime) {
+        this.mBeginTime = mBeginTime;
+    }
+
+    public List<Boolean> getKeepClockList() {
+        return this.keepClockList;
+    }
+
+    public void setKeepClockList(List<Boolean> keepClockList) {
+        this.keepClockList = keepClockList;
     }
 
 }

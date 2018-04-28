@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import hongzicong.saltedfish.fragment.DatePickerFragment;
@@ -108,7 +110,10 @@ public class AddHabitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public EveryDayTask getTaskFromViewHolder(){
-        EveryDayTask everyDayTask=new EveryDayTask(null,mAddDetailViewHolder.getText(),mAddDateViewHolder.getEndTime(),false,mAddNameViewHolder.getText(),false,mAddNumViewHolder.getNumOfDay());
+        Calendar calendar=Calendar.getInstance();
+        EveryDayTask everyDayTask=new EveryDayTask(null,mAddDetailViewHolder.getText(),calendar.getTimeInMillis(),
+                mAddDateViewHolder.getEndTime(),false,mAddNameViewHolder.getText(),
+                new ArrayList<Boolean>(),false,mAddNumViewHolder.getNumOfDay());
         return everyDayTask;
     }
 

@@ -9,36 +9,53 @@
     android:background="@color/background"
     android:layout_marginBottom="@dimen/bottom_navigation_height">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?android:attr/actionBarSize"
-        android:background="@color/toolbar_color"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        android:fitsSystemWindows="true"
         android:elevation="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:text="TODO"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:fitsSystemWindows="true"/>
+            android:minHeight="?android:attr/actionBarSize"
+            android:background="@color/toolbar_color"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:fitsSystemWindows="true"
+            app:contentInsetStart="0dp">
 
-    </android.support.v7.widget.Toolbar>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_view_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="20dp"
+                    android:text="2017年11月11日"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:textSize="18dp"
+                    android:fitsSystemWindows="true" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+
+    </android.support.design.widget.AppBarLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutAnimation="@anim/anim_listview_item"
-        android:layout_below="@id/toolbar"/>
+        android:layout_below="@id/appbarlayout"/>
 
 
     <com.github.clans.fab.FloatingActionMenu
@@ -48,7 +65,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="11dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="11dp"
         app:menu_labels_style="@style/menu_labels_style"
         app:menu_labels_margin="10dp"
         app:menu_labels_position="left"

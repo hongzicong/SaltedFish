@@ -1,7 +1,5 @@
 package hongzicong.saltedfish.model;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -24,11 +22,13 @@ public class DateDatas {
             mLevels.add(0);
         }
         for(EveryDayTask everyDayTask:everyDayTaskList){
-            if(everyDayTask.getIsComplete()){
-                Calendar calendar=Calendar.getInstance();
-                calendar.setTimeInMillis(everyDayTask.getMEndTime());
-                mLevels.set(calendar.get(Calendar.DATE)-1,mLevels.get(calendar.get(Calendar.DATE)-1)+1);
-                totalNum++;
+            Calendar calendar=Calendar.getInstance();
+            calendar.setTimeInMillis(everyDayTask.getMBeginTime());
+            for(int i=0;i<everyDayTask.getKeepClockList().size();++i){
+                if(everyDayTask.getKeepClockList().get(i)){
+                    mLevels.set(calendar.get(Calendar.DATE)-1,mLevels.get(calendar.get(Calendar.DATE)-1)+1);
+                }
+                calendar.add(Calendar.DATE,1);
             }
         }
         for(OneDayTask oneDayTask:oneDayTaskList){

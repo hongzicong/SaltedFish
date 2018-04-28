@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.NotNull;
 
 /**
  * Created by Dv00 on 2018/1/4.
@@ -20,16 +21,21 @@ public class OneDayTask extends Task{
     @Id(autoincrement = true)
     private Long id;
     private String detail;
+    private long mBeginTime;
     private long mEndTime;
     private boolean isComplete;
+
+    @NotNull
     private String name;
+
     private boolean isDetailTime=false;
 
-    @Generated(hash = 1512230442)
-    public OneDayTask(Long id, String detail, long mEndTime, boolean isComplete,
-                      String name, boolean isDetailTime) {
+    @Generated(hash = 875728040)
+    public OneDayTask(Long id, String detail, long mBeginTime, long mEndTime,
+            boolean isComplete, @NotNull String name, boolean isDetailTime) {
         this.id = id;
         this.detail = detail;
+        this.mBeginTime = mBeginTime;
         this.mEndTime = mEndTime;
         this.isComplete = isComplete;
         this.name = name;
@@ -101,6 +107,14 @@ public class OneDayTask extends Task{
 
     public void setMEndTime(long mEndTime) {
         this.mEndTime = mEndTime;
+    }
+
+    public long getMBeginTime() {
+        return this.mBeginTime;
+    }
+
+    public void setMBeginTime(long mBeginTime) {
+        this.mBeginTime = mBeginTime;
     }
 
 }
