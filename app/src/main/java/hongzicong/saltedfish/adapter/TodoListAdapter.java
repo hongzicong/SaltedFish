@@ -70,11 +70,11 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
         if(viewType==VIEW_TYPE_MENU_TASK){
             View itemView=layoutInflater.inflate(R.layout.item_text,parent,false);
-            return new TodoTextViewHolder(itemView,"每日任务");
+            return new TodoTextViewHolder(itemView,"当日计划");
         }
         else if(viewType==VIEW_TYPE_MENU_HABIT){
             View itemView=layoutInflater.inflate(R.layout.item_text,parent,false);
-            return new TodoTextViewHolder(itemView,"养成习惯");
+            return new TodoTextViewHolder(itemView,"日常习惯");
         }
         else if(viewType==VIEW_TYPE_TASK){
             View itemView=layoutInflater.inflate(R.layout.item_todo_list,parent,false);

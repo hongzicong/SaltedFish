@@ -15,6 +15,12 @@ public class Util {
         return simpleDateFormat.format(date);
     }
 
+    public static int getTotalDayNum() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("D");
+        Date date = new Date(System.currentTimeMillis());
+        return Integer.parseInt(simpleDateFormat.format(date));
+    }
+
     public static int getDay(int week,int day){
         int result=0;
         for(int i=0;i<week;++i){

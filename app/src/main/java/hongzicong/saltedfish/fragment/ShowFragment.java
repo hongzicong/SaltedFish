@@ -23,9 +23,10 @@ import hongzicong.saltedfish.utils.OneDayDaoUtil;
 import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.view.TableView;
 
+import static hongzicong.saltedfish.utils.Util.getTotalDayNum;
+
 public class ShowFragment extends Fragment {
 
-    //建立与数据库之间的工具联系
     private EveryDayDaoUtil everyDayDaoUtil=new EveryDayDaoUtil(UIUtils.getContext());
     private OneDayDaoUtil oneDayDaoUtil=new OneDayDaoUtil(UIUtils.getContext());
 
@@ -62,8 +63,7 @@ public class ShowFragment extends Fragment {
         View v=inflater.inflate(R.layout.fragment_show, container, false);
         mUnbinder= ButterKnife.bind(this,v);
 
-        Calendar calendar=Calendar.getInstance();
-        totalDayNum=calendar.get(Calendar.DATE);
+        totalDayNum=getTotalDayNum();
         dateDatas=new DateDatas(totalDayNum,everyDayDaoUtil.queryAllEveryDayTask(),oneDayDaoUtil.queryAllOneDayTask());
 
         initToolbar();

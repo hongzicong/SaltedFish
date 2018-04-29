@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:text="Setting"
+            android:text="Me"
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:textSize="20sp"
