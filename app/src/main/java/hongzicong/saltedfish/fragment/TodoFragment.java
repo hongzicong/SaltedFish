@@ -2,26 +2,21 @@ package hongzicong.saltedfish.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,7 +29,6 @@ import hongzicong.saltedfish.adapter.ItemTouchHelperClass;
 import hongzicong.saltedfish.adapter.TodoListAdapter;
 import hongzicong.saltedfish.model.EveryDayTask;
 import hongzicong.saltedfish.model.OneDayTask;
-import hongzicong.saltedfish.model.Task;
 import hongzicong.saltedfish.utils.EveryDayDaoUtil;
 import hongzicong.saltedfish.utils.OneDayDaoUtil;
 import hongzicong.saltedfish.utils.UIUtils;
@@ -99,6 +93,7 @@ public class TodoFragment extends Fragment {
         initLayerout();
 
         setOnAllListener();
+
         return v;
     }
 
@@ -109,13 +104,7 @@ public class TodoFragment extends Fragment {
     }
 
     private void initLayerout(){
-        if(everydayTaskList.isEmpty() && onedayTaskList.isEmpty()){
-            saltedFishImageView.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.INVISIBLE);
-        } else{
-            saltedFishImageView.setVisibility(View.INVISIBLE);
-            mRecyclerView.setVisibility(View.VISIBLE);
-        }
+        updateBackground();
         mTodoListAdapter=new TodoListAdapter(this,everydayTaskList,onedayTaskList);
         mRecyclerView.setAdapter(mTodoListAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -125,6 +114,15 @@ public class TodoFragment extends Fragment {
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
+    private void updateBackground(){
+        if(everydayTaskList.isEmpty() && onedayTaskList.isEmpty()){
+            saltedFishImageView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.INVISIBLE);
+        } else{
+            saltedFishImageView.setVisibility(View.INVISIBLE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }
+    }
 
     private void initToolbar(){
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
@@ -172,6 +170,7 @@ public class TodoFragment extends Fragment {
                     mTodoListAdapter.notifyDataSetChanged();
                     break;
             }
+            updateBackground();
             mFloatingActionsMenu.close(false);
         }
     }
