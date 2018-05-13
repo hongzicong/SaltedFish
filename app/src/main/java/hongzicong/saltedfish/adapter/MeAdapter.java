@@ -8,10 +8,11 @@ import android.view.ViewGroup;
 
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.activity.AboutActivity;
+import hongzicong.saltedfish.activity.SaltedFishSquareActivity;
 import hongzicong.saltedfish.activity.SettingActivity;
 import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.viewholder.SettingAvatarViewHolder;
-import hongzicong.saltedfish.viewholder.SettingViewHolder;
+import hongzicong.saltedfish.viewholder.SettingIconViewHolder;
 
 /**
  * Created by Dv00 on 2018/1/19.
@@ -24,33 +25,19 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
         if(viewType==0){
             View itemView=layoutInflater.inflate(R.layout.item_avatar_setting,parent,false);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //todo
-                }
-            });
             return new SettingAvatarViewHolder(itemView,"啦啦啦啦啦啦",R.drawable.test_avatar);
         }
         else if(viewType==1){
-            View itemView=layoutInflater.inflate(R.layout.item_ordinary_setting,parent,false);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //todo
-                }
-            });
-            return new SettingViewHolder(itemView,"关于我们",R.drawable.about_us_icon);
+            View itemView=layoutInflater.inflate(R.layout.item_icon_setting,parent,false);
+            return new SettingIconViewHolder(itemView,"咸鱼广场",R.drawable.fish_icon);
         }
         else if(viewType==2){
-            View itemView=layoutInflater.inflate(R.layout.item_ordinary_setting,parent,false);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //todo
-                }
-            });
-            return new SettingViewHolder(itemView,"设置",R.drawable.setting_icon);
+            View itemView=layoutInflater.inflate(R.layout.item_icon_setting,parent,false);
+            return new SettingIconViewHolder(itemView,"关于我们",R.drawable.about_us_icon);
+        }
+        else if(viewType==3){
+            View itemView=layoutInflater.inflate(R.layout.item_icon_setting,parent,false);
+            return new SettingIconViewHolder(itemView,"设置",R.drawable.setting_icon);
         }
         return null;
     }
@@ -69,11 +56,19 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent=new Intent(UIUtils.getContext(), SaltedFishSquareActivity.class);
+                    UIUtils.getContext().startActivity(intent);
+                }
+            });
+        }  else if(position == 2){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     Intent intent=new Intent(UIUtils.getContext(), AboutActivity.class);
                     UIUtils.getContext().startActivity(intent);
                 }
             });
-        } else if(position == 2){
+        } else if(position == 3){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -91,7 +86,7 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 
 }

@@ -21,16 +21,16 @@
         android:elevation="5dp"
         android:layout_alignParentTop="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:text="关于我们"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:fitsSystemWindows="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="咸鱼广场"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:fitsSystemWindows="true"/>
 
 
     </android.support.v7.widget.Toolbar>
@@ -41,7 +41,7 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:scaleType="centerInside"
-        android:src="@drawable/salted_fish_2"
+        android:src="@drawable/salted_fish_3"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>

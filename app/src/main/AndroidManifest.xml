@@ -25,7 +25,8 @@
         <activity android:name=".activity.AddHabitActivity" />
         <activity android:name=".activity.DetailActivity" />
         <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.AboutActivity"></activity>
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.SaltedFishSquareActivity"></activity>
     </application>
 
 </manifest>
