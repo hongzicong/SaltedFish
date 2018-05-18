@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="hongzicong.saltedfish.activity.AboutActivity"
-    android:fitsSystemWindows="true"
     android:background="@android:color/white">
 
 
@@ -17,7 +16,6 @@
         android:background="@color/toolbar_color"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        android:fitsSystemWindows="true"
         android:elevation="5dp"
         android:layout_alignParentTop="true">
 
@@ -29,8 +27,7 @@
         android:text="关于我们"
         android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:fitsSystemWindows="true"/>
+        android:textSize="20sp"/>
 
 
     </android.support.v7.widget.Toolbar>

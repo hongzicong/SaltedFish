@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:fitsSystemWindows="true"
     android:layout_marginBottom="@dimen/bottom_navigation_height"
     android:background="@android:color/white">
 
@@ -31,7 +30,6 @@
             android:background="@color/toolbar_color"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:fitsSystemWindows="true"
             app:contentInsetStart="0dp">
 
             <RelativeLayout
@@ -48,8 +46,7 @@
                     android:text="2017年11月11日"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="18dp"
-                    android:fitsSystemWindows="true" />
+                    android:textSize="18dp" />
 
             </RelativeLayout>
 
