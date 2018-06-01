@@ -3,6 +3,7 @@ package hongzicong.saltedfish.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,6 +55,23 @@ public class Util {
             }
         }
         return false;
+    }
+
+    public static boolean isValidName(String nameStr){
+        if(!TextUtils.isEmpty(nameStr)&&isStudentEmail(nameStr)){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isStudentEmail(String email){
+        //todo 学正则表达式
+        return true;
+    }
+
+    public static boolean isValidPassword(String password){
+        //todo
+        return true;
     }
 
 }

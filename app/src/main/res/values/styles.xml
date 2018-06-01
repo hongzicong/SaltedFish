@@ -18,4 +18,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="my_edittext">
+        <item name="android:colorControlNormal">@android:color/white</item>
+        <item name="android:colorControlActivated">@android:color/white</item>
+    </style>
+
+    <style name="my_textlayout">
+        <item name="android:textColor">#a5dee4</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

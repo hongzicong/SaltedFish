@@ -22,4 +22,5 @@ public class SettingViewHolder extends RecyclerView.ViewHolder  {
         ButterKnife.bind(this,itemView);
         textView.setText(text);
     }
+
 }

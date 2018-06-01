@@ -29,8 +29,7 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
         if(viewType == 0){
             View itemView=layoutInflater.inflate(R.layout.item_avatar_setting,parent,false);
-            return new SettingAvatarViewHolder(itemView,
-                    PersonalInfo.getPersonalInfo());
+            return new SettingAvatarViewHolder(itemView, PersonalInfo.getPersonalInfo());
         }
         else if(viewType == 1){
             View itemView=layoutInflater.inflate(R.layout.item_icon_setting,parent,false);
