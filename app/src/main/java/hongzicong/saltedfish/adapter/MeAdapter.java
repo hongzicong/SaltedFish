@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.activity.AboutActivity;
-import hongzicong.saltedfish.activity.LoginActivity;
+import hongzicong.saltedfish.activity.LoginRegisterActivity;
 import hongzicong.saltedfish.activity.SaltedFishFlagActivity;
 import hongzicong.saltedfish.activity.SaltedFishSquareActivity;
 import hongzicong.saltedfish.activity.SettingActivity;
@@ -61,7 +61,7 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
                         Intent intent=new Intent(UIUtils.getContext(), PersonalInfoActivity.class);
                         UIUtils.getContext().startActivity(intent);
                     } else{
-                        Intent intent=new Intent(UIUtils.getContext(), LoginActivity.class);
+                        Intent intent=new Intent(UIUtils.getContext(), LoginRegisterActivity.class);
                         UIUtils.getContext().startActivity(intent);
                     }
                 }
