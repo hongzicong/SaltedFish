@@ -32,6 +32,16 @@ import hongzicong.saltedfish.model.OneDayTask;
 import hongzicong.saltedfish.utils.EveryDayDaoUtil;
 import hongzicong.saltedfish.utils.OneDayDaoUtil;
 import hongzicong.saltedfish.utils.UIUtils;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 import static hongzicong.saltedfish.utils.Util.getToday;
 
@@ -71,6 +81,8 @@ public class TodoFragment extends Fragment {
     private List<EveryDayTask> everydayTaskList;
     private List<OneDayTask> onedayTaskList;
 
+    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+
     public static TodoFragment newInstance(){
         TodoFragment todoFragment=new TodoFragment();
         return todoFragment;
@@ -106,6 +118,13 @@ public class TodoFragment extends Fragment {
     private void initLayerout(){
         updateBackground();
         mTodoListAdapter=new TodoListAdapter(this,everydayTaskList,onedayTaskList);
+        mTodoListAdapter.setUpdateBackground(new TodoListAdapter.OnUpdateBackgroundListener() {
+            @Override
+            public void updateFragmentBackground() {
+                updateBackground();
+            }
+        });
+
         mRecyclerView.setAdapter(mTodoListAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -122,6 +141,12 @@ public class TodoFragment extends Fragment {
             saltedFishImageView.setVisibility(View.INVISIBLE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mCompositeDisposable.clear();
     }
 
     private void initToolbar(){
@@ -170,8 +195,8 @@ public class TodoFragment extends Fragment {
                     mTodoListAdapter.notifyDataSetChanged();
                     break;
             }
-            updateBackground();
             mFloatingActionsMenu.close(false);
+            updateBackground();
         }
     }
 

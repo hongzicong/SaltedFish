@@ -41,6 +41,16 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final int VIEW_TYPE_HABIT=2;
     private final int VIEW_TYPE_TASK=3;
 
+    private OnUpdateBackgroundListener onUpdateBackgroundListener;
+
+    public interface OnUpdateBackgroundListener{
+        public void updateFragmentBackground();
+    }
+
+    public void setUpdateBackground(OnUpdateBackgroundListener onUpdateBackgroundListener){
+        this.onUpdateBackgroundListener = onUpdateBackgroundListener;
+    }
+
     public TodoListAdapter(Fragment fragment,List<EveryDayTask> everydayTaskList,List<OneDayTask> onedayTaskList){
         mContext=fragment.getContext();
         this.mOnedayTaskList=onedayTaskList;
@@ -62,6 +72,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             mEverydayTaskList.remove(position-mOnedayTaskList.size()-2);
         }
         notifyDataSetChanged();
+        onUpdateBackgroundListener.updateFragmentBackground();
     }
 
     @Override
