@@ -40,7 +40,7 @@
 
 - Butterknife 8.5.1
 
-  > 作为触屏手机的app不得不处理许多繁琐的触屏点击事件，而我们使用butterknife可以用View绑定Click处理事件，简化代码。
+  > ButterKnife 是一个注入框架，专门为 Android View 设计的绑定注解，可以省去很多要写的东西，加速开发。 
 
 ## 实验原理
 
@@ -226,19 +226,19 @@
 
 ![成果统计.png](https://github.com/hongzicong/SaltedFish/blob/master/report/1.png?raw=true)
 
-下图这个界面是基本的TodoList，每日任务部分只是做了一个比较简单的TodoList，完成即打勾的形式。但下半部分的习惯养成是本app的亮点之一，前面的数字为待完成的天数，每天看到离目标更近一些会让人在坚持打卡之余更有前进的动力。
+下图这个界面是基本的TodoList，我们自定义了一个TableView，并建立一些接口，可以让开发者改变颜色、形状等，未来计划将其单独抽出来，写成一个开源的Android组件，每日任务部分只是做了一个比较简单的TodoList，完成即打勾的形式。但下半部分的习惯养成是本app的亮点之一，前面的数字为连续多少天完成任务，每天看到坚持了更加多天数可以让人在坚持打卡之余更有前进的动力，也更会有成就感，有点像背单词的打卡系统，拥有记录连续打卡天数的功能。
 
 ![Todo.png](https://github.com/hongzicong/SaltedFish/blob/master/report/2.png?raw=true)
 
-加号图标为我们在Todo页面提供了快捷方便的添加各种事项的功能。
-
-
+红色的加号图标使用了开源组件FloatingActionMenu，我们用它加多了三个功能，分别是添加习惯、添加每日任务和返回，由于内置了好看的动画，并且接口也很易用，所以我们采用它来在Todo页面提供了快捷方便的添加各种事项的功能。
 
 ![交互图标.png](https://github.com/hongzicong/SaltedFish/blob/master/report/3.png?raw=true)
 
 对于“养成习惯”的事件，我们添加了“想养成这个习惯的原因”一栏，目的是让人“不忘初心、善始善终”。
 
 ![4.png](https://github.com/hongzicong/SaltedFish/blob/master/report/4.png?raw=true) 
+
+而日期选择界面，我们使用了
 
 ![5.png](https://github.com/hongzicong/SaltedFish/blob/master/report/5.png?raw=true) 
 
