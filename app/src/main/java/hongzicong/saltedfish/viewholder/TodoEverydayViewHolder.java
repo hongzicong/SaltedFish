@@ -31,7 +31,9 @@ import hongzicong.saltedfish.utils.UIUtils;
  * Created by DELL-PC on 2017/12/31.
  */
 
-public class TodoEverydayViewHolder extends AbstractTodoViewHolder{
+public class TodoEverydayViewHolder extends RecyclerView.ViewHolder {
+
+    private Task mTask;
 
     @BindView(R.id.task_end_time)
     TextView endTime;
@@ -42,15 +44,77 @@ public class TodoEverydayViewHolder extends AbstractTodoViewHolder{
     @BindView(R.id.list_item_layout)
     SwipeLayout mSwipeLayout;
 
+    @BindView(R.id.item_detail)
+    TextView detailButton;
+
+    @BindView(R.id.item_complete)
+    TextView completeButton;
+
+    @BindView(R.id.item_delete)
+    TextView deleteButton;
+
+    @BindView(R.id.task_name)
+    TextView taskName;
+
+    @BindView(R.id.check_box)
+    CheckBox checkBox;
+
+    protected OnDeleteListener onDeleteListener;
+    protected OnCompleteListener onCompleteListener;
+
+    public interface OnDeleteListener{
+        void deleteTask();
+    }
+
+    public interface OnCompleteListener{
+        void completeTask();
+    }
+
+    public void setOnDeleteListener(OnDeleteListener onDeleteListener){
+        this.onDeleteListener=onDeleteListener;
+    }
+
+    public void setOnCompleteListener(OnCompleteListener onCompleteListener) {
+        this.onCompleteListener = onCompleteListener;
+    }
+
     public TodoEverydayViewHolder(View itemView){
         super(itemView);
         ButterKnife.bind(this,itemView);
     }
 
+    @OnClick(R.id.item_complete)
+    public void Complete(){
+        checkBox.setChecked(!checkBox.isChecked());
+        setMiddleLine(checkBox.isChecked());
+        onCompleteListener.completeTask();
+    }
+
+    @OnClick(R.id.check_box)
+    public void Check(){
+        setMiddleLine(checkBox.isChecked());
+        onCompleteListener.completeTask();
+    }
+
+    @OnClick(R.id.item_delete)
+    public void Delete(){
+        onDeleteListener.deleteTask();
+    }
+
     @OnClick(R.id.item_detail)
-    public void Click(){
+    public void Detail(){
         Intent intent=new Intent(UIUtils.getContext(), DetailActivity.class);
         UIUtils.getContext().startActivity(intent);
+    }
+
+    protected void setMiddleLine(boolean isComplete){
+        if(isComplete){
+            taskName.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
+            taskName.getPaint().setAntiAlias(true);
+        } else {
+            taskName.getPaint().setFlags(0);
+        }
+        taskName.setText(mTask.getName());
     }
 
     public void bind(EveryDayTask task){

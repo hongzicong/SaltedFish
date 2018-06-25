@@ -28,9 +28,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import hongzicong.saltedfish.model.signResponse;
-import hongzicong.saltedfish.netInterface.logInInterface;
-import hongzicong.saltedfish.netInterface.signUpInterface;
+import hongzicong.saltedfish.net.LogInInterface;
+import hongzicong.saltedfish.net.SignUpInterface;
 import hongzicong.saltedfish.utils.EncryptUtil;
+import hongzicong.saltedfish.utils.SharedPreferencesUtils;
 import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.utils.Util;
 import io.reactivex.Observer;
@@ -44,25 +45,31 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static hongzicong.saltedfish.model.PersonalInfo.loadPersonInfo;
 import static hongzicong.saltedfish.utils.Util.isValidName;
 
 public class LoginRegisterActivity extends AppCompatActivity {
+
     // cookie persistent : https://github.com/franmontiel/PersistentCookieJar
     private ClearableCookieJar cookieJar =
-            new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(this));
+            new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(BaseApplication.getContext()));
+
     private OkHttpClient build = new OkHttpClient.Builder()
             .connectTimeout(2, TimeUnit.SECONDS)
             .readTimeout(2, TimeUnit.SECONDS)
             .writeTimeout(2, TimeUnit.SECONDS)
             .cookieJar(cookieJar)
             .build();
+
     private Retrofit retrofit = new  Retrofit.Builder()
+            .client(build)
             .baseUrl("http://108.61.151.131:12192/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();
-    private logInInterface logInInterface = retrofit.create(logInInterface.class);
-    private signUpInterface signUpInterface = retrofit.create(signUpInterface.class);
+
+    private LogInInterface logInInterface = retrofit.create(LogInInterface.class);
+    private SignUpInterface signUpInterface = retrofit.create(SignUpInterface.class);
 
     private Unbinder mUnbinder;
 
@@ -78,13 +85,16 @@ public class LoginRegisterActivity extends AppCompatActivity {
     @BindView(R.id.password)
     EditText password;
 
+    @BindView(R.id.again_password)
+    EditText againPassword;
+
     @BindView(R.id.again_password_text_input_layout)
     TextInputLayout againPasswordTextInputLayout;
 
     @BindView(R.id.ok_button)
     Button okButton;
 
-    private boolean isLogin = false;
+    private boolean isLogin = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,29 +107,26 @@ public class LoginRegisterActivity extends AppCompatActivity {
         setAllClickListener();
     }
 
-    private void loadPersonInfo(String name, String avatar, String gender){
-        SharedPreferences.Editor editor= UIUtils.getContext().getSharedPreferences("PERSONAL_INFO",MODE_PRIVATE).edit();
-        editor.putString("name",name);
-        editor.putString("gender",name);
-        editor.putString("avatar",name);
-        editor.apply();
-    }
-
     private void setAllClickListener(){
-        final Context context = this;
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(Util.isNetworkAvailable(UIUtils.getContext())){
+                    if(!isLogin && !password.getText().toString().equals(againPassword.getText().toString())){
+                        Toast.makeText(UIUtils.getContext(), "Password not match", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     if(isValidName(name.getText().toString())){
-                        Map<String, String> map = new HashMap<>();
+                        final Map<String, String> map = new HashMap<>();
                         map.put("username", name.getText().toString());
+
                         try {
                             map.put("password", EncryptUtil.encryptPsd(password.getText().toString()));
                         } catch (Exception e) {
                             Log.i("Encrypt Error", "MD5 Failed");
                             e.printStackTrace();
                         }
+
                         String json = new Gson().toJson(map);
                         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
                         if(isLogin){
@@ -133,22 +140,22 @@ public class LoginRegisterActivity extends AppCompatActivity {
                                         @Override
                                         public void onNext(signResponse signResponse) {
                                             if (signResponse.getStatus().equals("OK")) {
-                                                // TODO: 登陆成功，跳转
+                                                loadPersonInfo(map.get("username"), "", "");
+                                                finish();
                                             } else {
-                                                Toast.makeText(context, signResponse.getMessage(), Toast.LENGTH_LONG).show();
+                                                Toast.makeText(UIUtils.getContext(), signResponse.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
 
                                         @Override
                                         public void onError(Throwable e) {
-                                            Toast.makeText(context, "服务器错误", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(UIUtils.getContext(), "服务器错误", Toast.LENGTH_LONG).show();
                                             e.printStackTrace();
                                         }
 
                                         @Override
                                         public void onComplete() { }
                                     });
-                            finish();
                         } else{
                             signUpInterface.signUp(body)
                                     .subscribeOn(Schedulers.io())
@@ -160,22 +167,22 @@ public class LoginRegisterActivity extends AppCompatActivity {
                                         @Override
                                         public void onNext(signResponse signResponse) {
                                             if (signResponse.getStatus().equals("OK")) {
-                                                // TODO: 注册成功，跳转
+                                                loadPersonInfo(map.get("username"), "", "");
+                                                finish();
                                             } else {
-                                                Toast.makeText(context, signResponse.getMessage(), Toast.LENGTH_LONG).show();
+                                                Toast.makeText(UIUtils.getContext(), signResponse.getMessage(), Toast.LENGTH_LONG).show();
                                             }
                                         }
 
                                         @Override
                                         public void onError(Throwable e) {
-                                            Toast.makeText(context, "服务器错误", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(UIUtils.getContext(), "服务器错误", Toast.LENGTH_LONG).show();
                                             e.printStackTrace();
                                         }
 
                                         @Override
                                         public void onComplete() { }
                                     });
-                            finish();
                         }
                     }
                     else{
