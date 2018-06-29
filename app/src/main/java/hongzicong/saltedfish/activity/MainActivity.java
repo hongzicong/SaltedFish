@@ -15,6 +15,10 @@ import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.fragment.MeFragment;
 import hongzicong.saltedfish.fragment.ShowFragment;
 import hongzicong.saltedfish.fragment.TodoFragment;
+import hongzicong.saltedfish.model.PersonalInfo;
+import hongzicong.saltedfish.utils.NetUtil;
+
+import static hongzicong.saltedfish.utils.NetUtil.LogIn;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         initBottomNavigationBar();
         initFragmentManager();
+
+        if(PersonalInfo.getPersonalInfo().hasRecord() && NetUtil.isNetworkAvailable(this)){
+            LogIn(PersonalInfo.getPersonalInfo().getName(), PersonalInfo.getPersonalInfo().getPassword());
+        }
 
     }
 

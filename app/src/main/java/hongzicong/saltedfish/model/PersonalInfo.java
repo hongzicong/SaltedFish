@@ -1,10 +1,6 @@
 package hongzicong.saltedfish.model;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import hongzicong.saltedfish.utils.SharedPreferencesUtils;
-import hongzicong.saltedfish.utils.UIUtils;
 
 public class PersonalInfo {
 
@@ -14,13 +10,28 @@ public class PersonalInfo {
 
     private String avatar;
 
+    private String password;
+
     private boolean login;
 
-    public PersonalInfo(String name, String gender, String avatar){
+    public PersonalInfo(String name, String gender, String avatar, String password){
         this.name = name;
         this.gender = gender;
         this.avatar = avatar;
+        this.password = password;
         this.login = false;
+    }
+
+    public boolean hasRecord() {
+        return !getPersonalInfo().getName().equals("");
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public boolean isLogin(){
@@ -57,19 +68,22 @@ public class PersonalInfo {
         if(personalInfo == null){
             personalInfo = new PersonalInfo(SharedPreferencesUtils.getInstance().getString("name",""),
                     SharedPreferencesUtils.getInstance().getString("gender",""),
-                    SharedPreferencesUtils.getInstance().getString("avatar",""));
+                    SharedPreferencesUtils.getInstance().getString("avatar",""),
+                    SharedPreferencesUtils.getInstance().getString("password",""));
             personalInfo.login = !personalInfo.getName().equals("");
         }
         return personalInfo;
     }
 
-    public static void loadPersonInfo(String name, String avatar, String gender){
+    public static void loadPersonInfo(String name, String avatar, String gender,String password){
         SharedPreferencesUtils.getInstance().putString("name", name);
         SharedPreferencesUtils.getInstance().putString("gender", gender);
         SharedPreferencesUtils.getInstance().putString("avatar", avatar);
+        SharedPreferencesUtils.getInstance().getString("password",password);
         getPersonalInfo().setName(name);
-        getPersonalInfo().setName(gender);
-        getPersonalInfo().setName(avatar);
+        getPersonalInfo().setGender(gender);
+        getPersonalInfo().setAvatar(avatar);
+        getPersonalInfo().setPassword(password);
     }
 
 }

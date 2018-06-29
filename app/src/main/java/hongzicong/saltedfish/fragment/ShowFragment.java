@@ -63,9 +63,9 @@ public class ShowFragment extends Fragment {
         mUnbinder= ButterKnife.bind(this,v);
 
         initToolbar();
+        initLayout();
         initTableView();
 
-        initLayout();
 
         return v;
     }

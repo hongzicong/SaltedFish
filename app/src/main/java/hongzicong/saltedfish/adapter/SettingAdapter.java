@@ -24,6 +24,7 @@ import hongzicong.saltedfish.model.PersonalInfo;
 import hongzicong.saltedfish.model.signResponse;
 import hongzicong.saltedfish.net.LogInInterface;
 import hongzicong.saltedfish.net.LogoutInterface;
+import hongzicong.saltedfish.utils.NetUtil;
 import hongzicong.saltedfish.utils.SharedPreferencesUtils;
 import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.utils.Util;
@@ -128,7 +129,7 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     if(!PersonalInfo.getPersonalInfo().isLogin()){
                         Toast.makeText(UIUtils.getContext(), "请先登录", Toast.LENGTH_SHORT).show();
                     } else{
-                        if(Util.isNetworkAvailable(UIUtils.getContext())){
+                        if(NetUtil.isNetworkAvailable(UIUtils.getContext())){
                             logoutInterface.logOut()
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
