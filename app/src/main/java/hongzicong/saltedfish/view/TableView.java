@@ -45,6 +45,14 @@ public class TableView extends View {
     private Paint paintFill_6 = new Paint();
     private Paint paintText=new Paint();
 
+    public final static int BLUE = 0;
+
+    public final static int RED = 1;
+
+    public final static int PURPLE = 2;
+
+    public static int style = 0;
+
     public TableView(Context context) {
         this(context, null);
     }
@@ -61,12 +69,33 @@ public class TableView extends View {
 
     private void setColor(){
         paintEmpty.setColor(ContextCompat.getColor(getContext(),R.color.empty_contri));
-        paintFill_1.setColor(ContextCompat.getColor(getContext(),R.color.fill_1_contri));
-        paintFill_2.setColor(ContextCompat.getColor(getContext(),R.color.fill_2_contri));
-        paintFill_3.setColor(ContextCompat.getColor(getContext(),R.color.fill_3_contri));
-        paintFill_4.setColor(ContextCompat.getColor(getContext(),R.color.fill_4_contri));
-        paintFill_5.setColor(ContextCompat.getColor(getContext(),R.color.fill_5_contri));
-        paintFill_6.setColor(ContextCompat.getColor(getContext(),R.color.fill_6_contri));
+
+        switch (style){
+            case BLUE:
+                paintFill_1.setColor(ContextCompat.getColor(getContext(),R.color.fill_1_blue));
+                paintFill_2.setColor(ContextCompat.getColor(getContext(),R.color.fill_2_blue));
+                paintFill_3.setColor(ContextCompat.getColor(getContext(),R.color.fill_3_blue));
+                paintFill_4.setColor(ContextCompat.getColor(getContext(),R.color.fill_4_blue));
+                paintFill_5.setColor(ContextCompat.getColor(getContext(),R.color.fill_5_blue));
+                paintFill_6.setColor(ContextCompat.getColor(getContext(),R.color.fill_6_blue));
+                break;
+            case RED:
+                paintFill_1.setColor(ContextCompat.getColor(getContext(),R.color.fill_1_red));
+                paintFill_2.setColor(ContextCompat.getColor(getContext(),R.color.fill_2_red));
+                paintFill_3.setColor(ContextCompat.getColor(getContext(),R.color.fill_3_red));
+                paintFill_4.setColor(ContextCompat.getColor(getContext(),R.color.fill_4_red));
+                paintFill_5.setColor(ContextCompat.getColor(getContext(),R.color.fill_5_red));
+                paintFill_6.setColor(ContextCompat.getColor(getContext(),R.color.fill_6_red));
+                break;
+            case PURPLE:
+                paintFill_1.setColor(ContextCompat.getColor(getContext(),R.color.fill_1_purple));
+                paintFill_2.setColor(ContextCompat.getColor(getContext(),R.color.fill_2_purple));
+                paintFill_3.setColor(ContextCompat.getColor(getContext(),R.color.fill_3_purple));
+                paintFill_4.setColor(ContextCompat.getColor(getContext(),R.color.fill_4_purple));
+                paintFill_5.setColor(ContextCompat.getColor(getContext(),R.color.fill_5_purple));
+                paintFill_6.setColor(ContextCompat.getColor(getContext(),R.color.fill_6_purple));
+                break;
+        }
         paintEmpty.setAntiAlias(true);
         paintFill_1.setAntiAlias(true);
         paintFill_2.setAntiAlias(true);
@@ -170,7 +199,7 @@ public class TableView extends View {
                     final int level = mAdapter.getLevel(Util.getDay(week,day));
                     final Paint paintByLevel = getPaintByLevel(level);
 
-                    drawItem(rectF, canvas,paintByLevel, level);
+                    drawItem(canvas,paintByLevel);
 
                 }
             }
@@ -197,7 +226,7 @@ public class TableView extends View {
         return paintEmpty;
     }
 
-    private void drawItem(RectF rect, Canvas canvas, Paint paintByLevel, int level) {
+    private void drawItem(Canvas canvas, Paint paintByLevel) {
         paintByLevel.setAntiAlias(true);
         canvas.drawCircle((rectF.left + rectF.right) / 2,(rectF.top + rectF.bottom) / 2, Math.min(itemWidth, itemHeight) / 2, paintByLevel);
     }

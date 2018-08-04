@@ -16,3 +16,17 @@
 <img src="https://github.com/hongzicong/SaltedFish/raw/master/Screenshots/empty_todo_page.png" width = "360" alt="Todo界面" align=center />
 
 <img src="https://github.com/hongzicong/SaltedFish/raw/master/Screenshots/me_page_unlogin.png" width = "360" alt="Todo界面" align=center />
+
+## 更换风格功能
+
+💙 蓝色风格（默认）
+
+<img src="https://github.com/hongzicong/SaltedFish/raw/master/Screenshots/show_page_blue.png" width = "360" alt="蓝色Show界面" align=center />
+
+❤️红色风格
+
+<img src="https://github.com/hongzicong/SaltedFish/raw/master/Screenshots/show_page_red.png" width = "360" alt="红色Show界面" align=center />
+
+💜 紫色风格
+
+<img src="https://github.com/hongzicong/SaltedFish/raw/master/Screenshots/show_page_purple.png" width = "360" alt="紫色Show界面" align=center />

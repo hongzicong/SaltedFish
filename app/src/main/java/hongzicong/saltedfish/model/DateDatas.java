@@ -64,8 +64,8 @@ public class DateDatas {
     }
 
     public int getLevel(int day){
-        //return (int) (Math.random() * 100) % 5;
-        return mLevels.get(day - 1);
+        return (int) (Math.random() * 100) % 5;
+        // return mLevels.get(day - 1);
     }
 
     public int getTotalNum(){

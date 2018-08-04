@@ -28,6 +28,7 @@ import hongzicong.saltedfish.utils.NetUtil;
 import hongzicong.saltedfish.utils.SharedPreferencesUtils;
 import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.utils.Util;
+import hongzicong.saltedfish.view.TableView;
 import hongzicong.saltedfish.viewholder.SettingViewHolder;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -97,7 +98,8 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO
+                    TableView.style = (TableView.style + 1) % 3;
+                    Toast.makeText(UIUtils.getContext(), "更换成功", Toast.LENGTH_SHORT).show();
                 }
             });
         } else if(position == 1){
