@@ -22,7 +22,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    private PersonalInfo mPersonalInfo;
 
     private PersonalInfoAdapter mPersonalInfoAdapter;
 
@@ -32,16 +31,10 @@ public class PersonalInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal_info);
         ButterKnife.bind(this);
 
-        initPersonalData();
-
         initToolbar();
 
         initLayout();
 
-    }
-
-    private void initPersonalData(){
-        mPersonalInfo = PersonalInfo.getPersonalInfo();
     }
 
     private void initLayout(){

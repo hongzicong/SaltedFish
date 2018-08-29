@@ -23,23 +23,27 @@ public class SettingAvatarViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.avatar)
     SquareAvatarImageView avatarImageView;
 
-    public SettingAvatarViewHolder(View itemView, PersonalInfo personalInfo){
+    public SettingAvatarViewHolder(View itemView){
         super(itemView);
         ButterKnife.bind(this,itemView);
 
-        if(!personalInfo.isLogin()){
+        updateData();
+    }
+
+    public void updateData(){
+        if(!PersonalInfo.isLogin()){
             nameTextView.setText("未登陆");
             avatarImageView.setImageResource(R.drawable.default_avatar);
         } else{
-            nameTextView.setText(personalInfo.getName());
-            if(personalInfo.getAvatar().equals("")) {
-                if(personalInfo.getGender().equals("女")) {
+            nameTextView.setText(PersonalInfo.getName());
+            if(PersonalInfo.getAvatar().equals("")) {
+                if(PersonalInfo.getGender().equals("女")) {
                     avatarImageView.setImageResource(R.drawable.girl_avatar);
                 } else{
                     avatarImageView.setImageResource(R.drawable.boy_avatar);
                 }
             } else{
-                avatarImageView.setImageURI(Uri.parse(personalInfo.getAvatar()));
+                avatarImageView.setImageURI(Uri.parse(PersonalInfo.getAvatar()));
             }
         }
     }

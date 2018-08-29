@@ -1,11 +1,13 @@
 package hongzicong.saltedfish.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -13,6 +15,8 @@ import android.view.View;
 
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.adapter.TableViewAdapter;
+import hongzicong.saltedfish.utils.SharedPreferencesUtils;
+import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.utils.Util;
 
 /**
@@ -30,8 +34,8 @@ public class TableView extends View {
     private int totalSize=120;
     private int daySize=120;
     private int itemSpace = 18;
-    private int rightTextPadding=130;
-    private int leftTextPadding=40;
+    private int rightTextPadding=20;
+    private int leftTextPadding=150;
     private int topTextPadding=140;
     private int bottomTextPadding=200;
     private RectF rectF;
@@ -51,8 +55,6 @@ public class TableView extends View {
 
     public final static int PURPLE = 2;
 
-    public static int style = 0;
-
     public TableView(Context context) {
         this(context, null);
     }
@@ -69,6 +71,8 @@ public class TableView extends View {
 
     private void setColor(){
         paintEmpty.setColor(ContextCompat.getColor(getContext(),R.color.empty_contri));
+
+        int style = SharedPreferencesUtils.getInstance().getInt("style", 0);
 
         switch (style){
             case BLUE:
@@ -141,48 +145,48 @@ public class TableView extends View {
             paintText.setAntiAlias(true);
             paintText.setTextAlign(Paint.Align.CENTER);
             paintText.setColor(ContextCompat.getColor(getContext(),R.color.week_text));
-            drawText(canvas,"M",paintText,rightTextPadding+getPaddingLeft()+itemWidth + itemSpace+itemWidth/2,100);
-            drawText(canvas,"W",paintText,rightTextPadding+getPaddingLeft()+3*(itemWidth + itemSpace)+itemWidth/2,100);
-            drawText(canvas,"F",paintText,rightTextPadding+getPaddingLeft()+5*(itemWidth + itemSpace)+itemWidth/2,100);
+            drawText(canvas,"M",paintText,leftTextPadding+getPaddingLeft()+itemWidth + itemSpace+itemWidth/2,100);
+            drawText(canvas,"W",paintText,leftTextPadding+getPaddingLeft()+3*(itemWidth + itemSpace)+itemWidth/2,100);
+            drawText(canvas,"F",paintText,leftTextPadding+getPaddingLeft()+5*(itemWidth + itemSpace)+itemWidth/2,100);
 
             //编写月份
             paintText.setTextSize(monthSize);
             paintText.setAntiAlias(true);
             paintText.setTextAlign(Paint.Align.RIGHT);
             paintText.setColor(ContextCompat.getColor(getContext(),R.color.month_text));
-            drawText(canvas,"Jan",paintText,rightTextPadding-40,getPaddingTop()+topTextPadding+monthSize+2*(itemHeight + itemSpace)+5);
+            drawText(canvas,"Jan",paintText,leftTextPadding-40,getPaddingTop()+topTextPadding+monthSize+2*(itemHeight + itemSpace)+5);
             if(currDay>334) {
-                drawText(canvas, "Dec", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 49 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Dec", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 49 * (itemHeight + itemSpace)+5);
             }
             if(currDay>304){
-                drawText(canvas, "Nov", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 45 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Nov", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 45 * (itemHeight + itemSpace)+5);
             }
             if(currDay>273){
-                drawText(canvas, "Oct", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 41 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Oct", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 41 * (itemHeight + itemSpace)+5);
             }
             if(currDay>243){
-                drawText(canvas, "Sep", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 36 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Sep", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 36 * (itemHeight + itemSpace)+5);
             }
             if(currDay>212){
-                drawText(canvas, "Aug", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 32 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Aug", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 32 * (itemHeight + itemSpace)+5);
             }
             if(currDay>181){
-                drawText(canvas, "Jul", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 27 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Jul", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 27 * (itemHeight + itemSpace)+5);
             }
             if(currDay>151){
-                drawText(canvas, "Jun", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 23 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Jun", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 23 * (itemHeight + itemSpace)+5);
             }
             if(currDay>120){
-                drawText(canvas, "May", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 19 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "May", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 19 * (itemHeight + itemSpace)+5);
             }
             if(currDay>90){
-                drawText(canvas, "Apr", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 14 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Apr", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 14 * (itemHeight + itemSpace)+5);
             }
             if(currDay>59){
-                drawText(canvas, "Mar", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 10 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Mar", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 10 * (itemHeight + itemSpace)+5);
             }
             if(currDay>31){
-                drawText(canvas, "Feb", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 6 * (itemHeight + itemSpace)+5);
+                drawText(canvas, "Feb", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 6 * (itemHeight + itemSpace)+5);
             }
 
             int tempDay=0;
@@ -191,7 +195,7 @@ public class TableView extends View {
                     if(tempDay==currDay){
                         return;
                     }
-                    rectF.left = day * (itemWidth + itemSpace) + getPaddingLeft()+rightTextPadding;
+                    rectF.left = day * (itemWidth + itemSpace) + getPaddingLeft()+leftTextPadding;
                     rectF.right = rectF.left + itemWidth ;
                     rectF.top = week * (itemHeight + itemSpace) + getPaddingTop()+topTextPadding;
                     rectF.bottom = rectF.top + itemHeight;

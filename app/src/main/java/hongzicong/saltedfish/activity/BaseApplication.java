@@ -42,4 +42,6 @@ public class BaseApplication extends Application {
         dbManager=DBManager.getInstance();
     }
 
+
+
 }

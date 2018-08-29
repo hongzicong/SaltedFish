@@ -12,36 +12,26 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.google.gson.Gson;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.activity.BaseApplication;
 import hongzicong.saltedfish.model.PersonalInfo;
 import hongzicong.saltedfish.model.signResponse;
-import hongzicong.saltedfish.net.LogInInterface;
 import hongzicong.saltedfish.net.LogoutInterface;
 import hongzicong.saltedfish.utils.NetUtil;
 import hongzicong.saltedfish.utils.SharedPreferencesUtils;
 import hongzicong.saltedfish.utils.UIUtils;
-import hongzicong.saltedfish.utils.Util;
-import hongzicong.saltedfish.view.TableView;
 import hongzicong.saltedfish.viewholder.SettingViewHolder;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Dv00 on 2018/12/27.
@@ -98,7 +88,8 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TableView.style = (TableView.style + 1) % 3;
+                    int style = SharedPreferencesUtils.getInstance().getInt("style", 0);
+                    SharedPreferencesUtils.getInstance().putInt("style", (style + 1) % 3);
                     Toast.makeText(UIUtils.getContext(), "更换成功", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -106,7 +97,7 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!PersonalInfo.getPersonalInfo().isLogin()){
+                    if(!PersonalInfo.isLogin()){
                         Toast.makeText(UIUtils.getContext(), "请先登录", Toast.LENGTH_SHORT).show();
                     } else{
                         // TODO
@@ -117,7 +108,7 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!PersonalInfo.getPersonalInfo().isLogin()){
+                    if(!PersonalInfo.isLogin()){
                         Toast.makeText(UIUtils.getContext(), "请先登录", Toast.LENGTH_SHORT).show();
                     } else{
                         // TODO
@@ -128,9 +119,16 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!PersonalInfo.getPersonalInfo().isLogin()){
+                    if(!PersonalInfo.isLogin()){
                         Toast.makeText(UIUtils.getContext(), "请先登录", Toast.LENGTH_SHORT).show();
                     } else{
+
+                        SharedPreferencesUtils.getInstance().putBoolean("auto_login", false);
+                        SharedPreferencesUtils.getInstance().putString("name", "");
+                        SharedPreferencesUtils.getInstance().putString("gender", "");
+                        SharedPreferencesUtils.getInstance().putString("avatar", "");
+                        SharedPreferencesUtils.getInstance().putString("password", "");
+                        /*
                         if(NetUtil.isNetworkAvailable(UIUtils.getContext())){
                             logoutInterface.logOut()
                                     .subscribeOn(Schedulers.io())
@@ -143,10 +141,6 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                                         public void onNext(signResponse signResponse) {
                                             if (signResponse.getStatus().equals("OK")) {
                                                 Log.d("HAHA","logout successfully");
-
-                                                SharedPreferencesUtils.getInstance().putString("name", "");
-                                                SharedPreferencesUtils.getInstance().putString("gender", "");
-                                                SharedPreferencesUtils.getInstance().putString("avatar", "");
 
                                                 Toast.makeText(UIUtils.getContext(), "成功退出登录", Toast.LENGTH_SHORT).show();
                                             } else {
@@ -166,6 +160,7 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         } else{
                             Toast.makeText(UIUtils.getContext(),"网络未连接",Toast.LENGTH_SHORT).show();
                         }
+                         */
                     }
                 }
             });

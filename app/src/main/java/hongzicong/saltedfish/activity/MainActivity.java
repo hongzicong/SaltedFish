@@ -20,8 +20,7 @@ import hongzicong.saltedfish.fragment.ShowFragment;
 import hongzicong.saltedfish.fragment.TodoFragment;
 import hongzicong.saltedfish.model.PersonalInfo;
 import hongzicong.saltedfish.utils.NetUtil;
-
-import static hongzicong.saltedfish.utils.NetUtil.LogIn;
+import hongzicong.saltedfish.utils.SharedPreferencesUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         initBottomNavigationBar();
         initFragmentManager();
 
-        if(PersonalInfo.getPersonalInfo().hasRecord() && NetUtil.isNetworkAvailable(this)){
-            LogIn(PersonalInfo.getPersonalInfo().getName(), PersonalInfo.getPersonalInfo().getPassword());
+        if(SharedPreferencesUtils.getInstance().getBoolean("auto_login", false)){
+            // TODO
         }
 
         // open the introduction
