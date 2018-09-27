@@ -146,7 +146,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public int getItemViewType(int position) {
         if(position == 0){
             return VIEW_TYPE_MENU_TASK;
-        } else if(position == 1+mOnedayTaskList.size()){
+        } else if(position == 1 + mOnedayTaskList.size()){
             return VIEW_TYPE_MENU_HABIT;
         } else if(position <= mOnedayTaskList.size()){
             return VIEW_TYPE_TASK;
