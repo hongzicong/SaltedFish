@@ -12,10 +12,6 @@ import org.greenrobot.greendao.annotation.NotNull;
 
 import hongzicong.saltedfish.db.BooleanConverter;
 
-/**
- * Created by Dv00 on 2018/1/4.
- */
-
 //用来记录习惯的object
 @Entity
 public class EveryDayTask extends Task{
