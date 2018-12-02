@@ -1,7 +1,6 @@
 package hongzicong.saltedfish.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.adapter.FlagAdapter;
-import hongzicong.saltedfish.model.Flag;
 import hongzicong.saltedfish.utils.SharedPreferencesUtils;
 
 import hongzicong.saltedfish.utils.UIUtils;
@@ -61,6 +59,11 @@ public class SaltedFishFlagActivity extends AppCompatActivity {
 
         initClickListener();
 
+        updateLayout();
+
+    }
+
+    private void updateLayout(){
         if(SharedPreferencesUtils.getInstance().getBoolean("has_flag", false)){
             saltedFishImageView.setVisibility(View.INVISIBLE);
             mRecyclerView.setVisibility(View.VISIBLE);
@@ -70,6 +73,7 @@ public class SaltedFishFlagActivity extends AppCompatActivity {
             mRecyclerView.setVisibility(View.INVISIBLE);
             deleteFAB.setVisibility(View.INVISIBLE);
         }
+        mFlagAdapter.notifyDataSetChanged();
     }
 
     private void initClickListener(){
@@ -77,8 +81,10 @@ public class SaltedFishFlagActivity extends AppCompatActivity {
         deleteFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
                 SharedPreferencesUtils.getInstance().putBoolean("has_flag", false);
+                SharedPreferencesUtils.getInstance().putString("prob_flag", "");
+                SharedPreferencesUtils.getInstance().putString("likely_flag", "");
+                updateLayout();
             }
         });
 
@@ -92,7 +98,7 @@ public class SaltedFishFlagActivity extends AppCompatActivity {
     }
 
     private void initLayout(){
-        mFlagAdapter = new FlagAdapter(new ArrayList<Flag>(), new ArrayList<Flag>());
+        mFlagAdapter = new FlagAdapter();
         mRecyclerView.setAdapter(mFlagAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -125,11 +131,12 @@ public class SaltedFishFlagActivity extends AppCompatActivity {
                         .setDirection(0.0, 359.0)
                         .setSpeed(1f, 5f)
                         .setFadeOutEnabled(true)
-                        .setTimeToLive(2000L)
+                        .setTimeToLive(1500L)
                         .addShapes(Shape.RECT, Shape.CIRCLE)
                         .addSizes(new Size(12, 5))
                         .setPosition(-50f, mKonfettiView.getWidth() + 50f, -50f, -50f)
                         .streamFor(300, 5000L);
+                updateLayout();
             }
         }
     }
