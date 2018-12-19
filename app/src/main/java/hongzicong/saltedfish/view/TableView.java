@@ -33,7 +33,7 @@ public class TableView extends View {
     private int rightTextPadding=130;
     private int leftTextPadding=40;
     private int topTextPadding=140;
-    private int bottomTextPadding=260;
+    private int bottomTextPadding=180;
     private RectF rectF;
 
     private Paint paintEmpty = new Paint();

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import hongzicong.saltedfish.activity.BaseAddActivity;
 import hongzicong.saltedfish.activity.BaseApplication;
 
 public class UIUtils {

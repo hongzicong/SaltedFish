@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import hongzicong.saltedfish.fragment.DatePickerFragment;
@@ -97,7 +98,9 @@ public class AddTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public OneDayTask getTaskFromViewHolder(){
-        OneDayTask oneDayTask=new OneDayTask(null,mAddDetailViewHolder.getText(),mAddDateViewHolder.getEndTime(),false,mAddNameViewHolder.getText(),false);
+        Calendar calendar=Calendar.getInstance();
+        OneDayTask oneDayTask=new OneDayTask(null,mAddDetailViewHolder.getText(),calendar.getTimeInMillis(),
+                mAddDateViewHolder.getEndTime(), false,mAddNameViewHolder.getText(),false);
         return oneDayTask;
     }
 

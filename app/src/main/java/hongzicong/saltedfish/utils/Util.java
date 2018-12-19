@@ -1,10 +1,19 @@
 package hongzicong.saltedfish.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by DELL-PC on 2018/1/1.
  */
 
 public class Util {
+
+    public static String getToday(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
+    }
 
     public static int getDay(int week,int day){
         int result=0;

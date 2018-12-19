@@ -50,25 +50,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onItemMoved(int fromPosition, int toPosition) {
         //todo
-        if(fromPosition==0||fromPosition==mOnedayTaskList.size()+1){
-            return;
-        }
-        if(fromPosition>0&&fromPosition<=mOnedayTaskList.size()&&toPosition>0&&toPosition<=mOnedayTaskList.size()){
-            if(fromPosition<toPosition){
-                for(int i=fromPosition; i<toPosition; i++){
-                    Collections.swap(mOnedayTaskList, i, i+1);
-                }
-            }
-            else{
-                for(int i=fromPosition; i > toPosition; i--){
-                    Collections.swap(mOnedayTaskList, i, i-1);
-                }
-            }
-            notifyItemMoved(fromPosition,toPosition);
-        }else if(fromPosition>0&&fromPosition<=mOnedayTaskList.size()&&toPosition>0&&toPosition<=mOnedayTaskList.size()){
-
-            notifyItemMoved(fromPosition,toPosition);
-        }
     }
 
     @Override

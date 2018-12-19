@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -37,9 +38,10 @@ import hongzicong.saltedfish.utils.EveryDayDaoUtil;
 import hongzicong.saltedfish.utils.OneDayDaoUtil;
 import hongzicong.saltedfish.utils.UIUtils;
 
+import static hongzicong.saltedfish.utils.Util.getToday;
+
 public class TodoFragment extends Fragment {
 
-    //建立与数据库之间的工具联系
     private EveryDayDaoUtil everyDayDaoUtil=new EveryDayDaoUtil(UIUtils.getContext());
     private OneDayDaoUtil oneDayDaoUtil=new OneDayDaoUtil(UIUtils.getContext());
 
@@ -47,8 +49,8 @@ public class TodoFragment extends Fragment {
     private TodoListAdapter mTodoListAdapter;
     public ItemTouchHelper itemTouchHelper;
 
-    public static final int todoReqeustCode=1;
-    public static final int habitRequestCode=2;
+    public static final int todoReqeustCode = 1;
+    public static final int habitRequestCode = 2;
 
     @BindView(R.id.list_todo)
     RecyclerView mRecyclerView;
@@ -65,6 +67,9 @@ public class TodoFragment extends Fragment {
     @BindView(R.id.fab_add_todo)
     FloatingActionButton mAddTodoButton;
 
+    @BindView(R.id.text_view_date)
+    TextView dateTextView;
+
     private List<EveryDayTask> everydayTaskList;
     private List<OneDayTask> onedayTaskList;
 
@@ -73,17 +78,13 @@ public class TodoFragment extends Fragment {
         return todoFragment;
     }
 
-    //公共方法，为了让托管它们的activity调用
-    //Bundle用来保存状态
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    //View视图在onCreateView方法中生成
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //生成fragment的视图
         View v=inflater.inflate(R.layout.fragment_todo, container, false);
         mUnbinder= ButterKnife.bind(this,v);
 
@@ -109,32 +110,32 @@ public class TodoFragment extends Fragment {
         mUnbinder.unbind();
     }
 
-    //初始化toolbar
+
     private void initToolbar(){
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        dateTextView.setText(getToday());
     }
 
-    //从数据库中更新数据
+
     private void updateDataFromDB(){
         everydayTaskList=everyDayDaoUtil.queryAllEveryDayTask();
         onedayTaskList=oneDayDaoUtil.queryAllOneDayTask();
     }
 
-    //设置floatingactionbutton的监听器
     private void setOnAllListener(){
-        //每日任务的浮动按钮，且需要知道有没有成功创建
         mAddTodoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mFloatingActionsMenu.close(true);
                 Intent intent=new Intent(getContext(), AddTaskActivity.class);
                 startActivityForResult(intent,todoReqeustCode);
             }
         });
-        //习惯的浮动按钮，且需要知道有没有成功创建
         mAddHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mFloatingActionsMenu.close(true);
                 Intent intent=new Intent(getContext(),AddHabitActivity.class);
                 startActivityForResult(intent,habitRequestCode);
             }
@@ -145,7 +146,6 @@ public class TodoFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean returnCode = data.getBooleanExtra("returnCode",false);
         long id=data.getLongExtra("returnId",-1);
-        //当成功创建时，从数据库重新读取信息，但是不改变原来的list，否则会出错
         if(returnCode==true){
             switch (requestCode){
                 case todoReqeustCode:
