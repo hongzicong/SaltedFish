@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import hongzicong.saltedfish.R;
+import hongzicong.saltedfish.viewholder.SettingAvatarViewHolder;
 import hongzicong.saltedfish.viewholder.SettingViewHolder;
 
 /**
@@ -18,7 +19,17 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
         if(viewType==0){
-            View itemView=layoutInflater.inflate(R.layout.item_setting,parent,false);
+            View itemView=layoutInflater.inflate(R.layout.item_avatar_setting,parent,false);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //todo
+                }
+            });
+            return new SettingAvatarViewHolder(itemView,"啦啦啦啦啦啦",R.drawable.test_avatar);
+        }
+        else if(viewType==1){
+            View itemView=layoutInflater.inflate(R.layout.item_ordinary_setting,parent,false);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -27,8 +38,8 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
             return new SettingViewHolder(itemView,"设置",R.drawable.setting_icon);
         }
-        else if(viewType==1){
-            View itemView=layoutInflater.inflate(R.layout.item_setting,parent,false);
+        else if(viewType==2){
+            View itemView=layoutInflater.inflate(R.layout.item_ordinary_setting,parent,false);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -52,7 +63,7 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 
 }

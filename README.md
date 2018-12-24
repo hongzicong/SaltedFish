@@ -9,4 +9,7 @@
 
 
 # demo图
-<img src="https://github.com/hongzicong/SaltedFish/raw/master/Screenshots/show.png" width = "360" alt="show界面" align=center />
+
+<img src="https://github.com/hongzicong/SaltedFish/raw/master/Screenshots/show_page.png" width = "360" alt="Show界面" align=center />
+
+<img src="https://github.com/hongzicong/SaltedFish/raw/master/Screenshots/empty_todo_page.png" width = "360" alt="Todo界面" align=center />
