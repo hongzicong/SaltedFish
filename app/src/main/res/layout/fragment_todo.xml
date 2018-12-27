@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:background="@android:color/white"
-    android:layout_marginBottom="@dimen/bottom_navigation_height">
+    android:layout_marginBottom="@dimen/bottom_navigation_height"
+    android:background="@android:color/white">
 
     <ImageView
         android:id="@+id/salted_fish_image_view"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:scaleType="centerInside"
-        android:src="@drawable/salted_fish_want_success"
+        android:src="@drawable/salted_fish_1"
         android:layout_centerInParent="true"/>
 
     <android.support.design.widget.AppBarLayout

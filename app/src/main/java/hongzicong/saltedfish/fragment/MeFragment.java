@@ -36,7 +36,7 @@ public class MeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_set, container, false);
+        View v=inflater.inflate(R.layout.fragment_me, container, false);
         mUnbinder= ButterKnife.bind(this,v);
 
         initToolbar();
