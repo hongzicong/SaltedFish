@@ -15,13 +15,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import hongzicong.saltedfish.R;
-import hongzicong.saltedfish.adapter.SettingAdapter;
+import hongzicong.saltedfish.adapter.MeAdapter;
 import hongzicong.saltedfish.utils.UIUtils;
 
-public class SetFragment extends Fragment {
+public class MeFragment extends Fragment {
 
     private Unbinder mUnbinder;
-    private SettingAdapter settingAdapter=new SettingAdapter();
+    private MeAdapter meAdapter =new MeAdapter();
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -29,9 +29,9 @@ public class SetFragment extends Fragment {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    public static SetFragment newInstance(){
-        SetFragment setFragment=new SetFragment();
-        return setFragment;
+    public static MeFragment newInstance(){
+        MeFragment meFragment =new MeFragment();
+        return meFragment;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class SetFragment extends Fragment {
 
         initToolbar();
 
-        recyclerView.setAdapter(settingAdapter);
+        recyclerView.setAdapter(meAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(UIUtils.getContext()));
 
         return v;

@@ -1,11 +1,15 @@
 package hongzicong.saltedfish.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import hongzicong.saltedfish.R;
+import hongzicong.saltedfish.activity.AboutActivity;
+import hongzicong.saltedfish.activity.SettingActivity;
+import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.viewholder.SettingAvatarViewHolder;
 import hongzicong.saltedfish.viewholder.SettingViewHolder;
 
@@ -13,7 +17,7 @@ import hongzicong.saltedfish.viewholder.SettingViewHolder;
  * Created by Dv00 on 2018/1/19.
  */
 
-public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,7 +40,7 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     //todo
                 }
             });
-            return new SettingViewHolder(itemView,"设置",R.drawable.setting_icon);
+            return new SettingViewHolder(itemView,"关于我们",R.drawable.about_us_icon);
         }
         else if(viewType==2){
             View itemView=layoutInflater.inflate(R.layout.item_ordinary_setting,parent,false);
@@ -46,7 +50,7 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     //todo
                 }
             });
-            return new SettingViewHolder(itemView,"关于我们",R.drawable.about_us_icon);
+            return new SettingViewHolder(itemView,"设置",R.drawable.setting_icon);
         }
         return null;
     }
@@ -54,6 +58,30 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         holder.itemView.setTag(position);
+        if(position == 0){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        } else if(position == 1){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(UIUtils.getContext(), AboutActivity.class);
+                    UIUtils.getContext().startActivity(intent);
+                }
+            });
+        } else if(position == 2){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(UIUtils.getContext(), SettingActivity.class);
+                    UIUtils.getContext().startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override

@@ -12,7 +12,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hongzicong.saltedfish.R;
-import hongzicong.saltedfish.fragment.SetFragment;
+import hongzicong.saltedfish.fragment.MeFragment;
 import hongzicong.saltedfish.fragment.ShowFragment;
 import hongzicong.saltedfish.fragment.TodoFragment;
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager mFragmentManager;
 
-    private SetFragment mSetFragment;
+    private MeFragment mMeFragment;
     private ShowFragment mShowFragment;
     private TodoFragment mTodoFragment;
 
@@ -77,10 +77,10 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.replace(R.id.member_layout,mTodoFragment);
                         break;
                     case 2:
-                        if(mSetFragment==null){
-                            mSetFragment=SetFragment.newInstance();
+                        if(mMeFragment ==null){
+                            mMeFragment = MeFragment.newInstance();
                         }
-                        fragmentTransaction.replace(R.id.member_layout,mSetFragment);
+                        fragmentTransaction.replace(R.id.member_layout, mMeFragment);
                         break;
                     default:
                         break;
