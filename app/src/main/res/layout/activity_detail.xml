@@ -16,8 +16,7 @@
         android:background="@color/toolbar_color"
 
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:paddingTop="@dimen/toolbar_padding_top"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

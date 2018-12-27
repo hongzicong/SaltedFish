@@ -37,6 +37,14 @@ public class AddHabitActivity extends BaseAddActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        Intent intent=new Intent();
+        intent.putExtra("returnCode",false);
+        this.setResult(TodoFragment.habitRequestCode,intent);
+        super.onBackPressed();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch (item.getItemId()){
