@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
+
 import java.util.Calendar;
 
 import butterknife.BindColor;
@@ -36,6 +38,9 @@ public class TodoEverydayViewHolder extends AbstractTodoViewHolder{
 
     @BindDrawable(R.drawable.round_rectangle)
     Drawable textBackground;
+
+    @BindView(R.id.list_item_layout)
+    SwipeLayout mSwipeLayout;
 
     public TodoEverydayViewHolder(View itemView){
         super(itemView);
@@ -64,6 +69,10 @@ public class TodoEverydayViewHolder extends AbstractTodoViewHolder{
             setMiddleLine(true);
         }
         taskName.setText(mTask.getName());
+    }
+
+    public void close(){
+        mSwipeLayout.close();
     }
 
 }

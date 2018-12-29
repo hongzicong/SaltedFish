@@ -1,16 +1,16 @@
 package hongzicong.saltedfish.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +47,8 @@ public class ShowFragment extends Fragment {
     @BindView(R.id.text_view_total_num)
     TextView totalNum;
 
+    @BindView(R.id.scroll_view)
+    ScrollView mScrollView;
 
     public static ShowFragment newInstance() {
         ShowFragment fragment = new ShowFragment();
@@ -63,14 +65,11 @@ public class ShowFragment extends Fragment {
         View v=inflater.inflate(R.layout.fragment_show, container, false);
         mUnbinder= ButterKnife.bind(this,v);
 
-        totalDayNum=getTotalDayNum();
-        dateDatas=new DateDatas(totalDayNum,everyDayDaoUtil.queryAllEveryDayTask(),oneDayDaoUtil.queryAllOneDayTask());
-
         initToolbar();
         initTableView();
 
-        totalDay.setText(totalDayNum+" days");
-        totalNum.setText(dateDatas.getTotalNum()+" total");
+        initLayout();
+
         return v;
     }
 
@@ -78,6 +77,16 @@ public class ShowFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+    private void initLayout(){
+
+        totalDayNum = getTotalDayNum();
+        dateDatas = new DateDatas(totalDayNum,everyDayDaoUtil.queryAllEveryDayTask(),oneDayDaoUtil.queryAllOneDayTask());
+
+        totalDay.setText(totalDayNum+" days");
+        totalNum.setText(dateDatas.getTotalNum()+" total");
+
     }
 
     private void initToolbar(){

@@ -61,8 +61,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             everyDayDaoUtil.deleteEveryDayTask(mEverydayTaskList.get(position-mOnedayTaskList.size()-2));
             mEverydayTaskList.remove(position-mOnedayTaskList.size()-2);
         }
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position,getItemCount()-position);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -104,6 +103,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     boolean isComplete=mEverydayTaskList.get(position-mOnedayTaskList.size()-2).getIsComplete();
                     mEverydayTaskList.get(position-mOnedayTaskList.size()-2).setIsComplete(!isComplete);
                     everyDayDaoUtil.updateEveryDayTask(mEverydayTaskList.get(position-mOnedayTaskList.size()-2));
+                    ((TodoEverydayViewHolder) holder).close();
                 }
             });
         } else if(holder instanceof TodoOnedayViewHolder){
@@ -117,9 +117,10 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((TodoOnedayViewHolder) holder).setOnCompleteListener(new TodoOnedayViewHolder.OnCompleteListener() {
                 @Override
                 public void completeTask() {
-                    boolean isComplete=mOnedayTaskList.get(position-1).getIsComplete();
+                    boolean isComplete = mOnedayTaskList.get(position-1).getIsComplete();
                     mOnedayTaskList.get(position-1).setIsComplete(!isComplete);
                     oneDayDaoUtil.updateOneDayTask(mOnedayTaskList.get(position-1));
+                    ((TodoOnedayViewHolder) holder).close();
                 }
             });
         }
@@ -127,16 +128,16 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return mEverydayTaskList.size()+2+mOnedayTaskList.size();
+        return mEverydayTaskList.size() + 2 + mOnedayTaskList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(position==0){
+        if(position == 0){
             return VIEW_TYPE_MENU_TASK;
-        } else if(position==1+mOnedayTaskList.size()){
+        } else if(position == 1+mOnedayTaskList.size()){
             return VIEW_TYPE_MENU_HABIT;
-        } else if(position<=mOnedayTaskList.size()){
+        } else if(position <= mOnedayTaskList.size()){
             return VIEW_TYPE_TASK;
         } else{
             return VIEW_TYPE_HABIT;

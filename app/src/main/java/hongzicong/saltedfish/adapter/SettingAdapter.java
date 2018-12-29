@@ -4,8 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import hongzicong.saltedfish.R;
+import hongzicong.saltedfish.model.PersonalInfo;
+import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.viewholder.SettingViewHolder;
 
 /**
@@ -19,13 +22,17 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         LayoutInflater layoutInflater= LayoutInflater.from(parent.getContext());
         if(viewType==0){
             View itemView=layoutInflater.inflate(R.layout.item_setting,parent,false);
-            return new SettingViewHolder(itemView,"备份");
+            return new SettingViewHolder(itemView,"更改风格");
         }
         else if(viewType==1){
             View itemView=layoutInflater.inflate(R.layout.item_setting,parent,false);
-            return new SettingViewHolder(itemView,"更新");
+            return new SettingViewHolder(itemView,"备份");
         }
         else if(viewType==2){
+            View itemView=layoutInflater.inflate(R.layout.item_setting,parent,false);
+            return new SettingViewHolder(itemView,"更新");
+        }
+        else if(viewType==3){
             View itemView=layoutInflater.inflate(R.layout.item_setting,parent,false);
             return new SettingViewHolder(itemView,"退出登录");
         }
@@ -39,21 +46,40 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    // TODO
                 }
             });
         } else if(position == 1){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if(!PersonalInfo.getPersonalInfo().isLogin()){
+                        Toast.makeText(UIUtils.getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                    } else{
+                        // TODO
+                    }
                 }
             });
         } else if(position == 2){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if(!PersonalInfo.getPersonalInfo().isLogin()){
+                        Toast.makeText(UIUtils.getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                    } else{
+                        // TODO
+                    }
+                }
+            });
+        } else if(position == 3){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!PersonalInfo.getPersonalInfo().isLogin()){
+                        Toast.makeText(UIUtils.getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                    } else{
+                        // TODO
+                    }
                 }
             });
         }
@@ -66,6 +92,6 @@ public class SettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }

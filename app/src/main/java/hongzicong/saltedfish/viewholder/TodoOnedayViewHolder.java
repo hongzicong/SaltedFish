@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.swipe.SwipeLayout;
+
 import java.util.Calendar;
 
 import butterknife.BindDrawable;
@@ -37,13 +39,16 @@ public class TodoOnedayViewHolder extends AbstractTodoViewHolder{
     @BindDrawable(R.drawable.round_rectangle)
     Drawable textBackground;
 
+    @BindView(R.id.list_item_layout)
+    SwipeLayout mSwipeLayout;
+
     public TodoOnedayViewHolder(View itemView){
         super(itemView);
         ButterKnife.bind(this,itemView);
     }
 
     public void bind(OneDayTask oneDayTask){
-        mTask=oneDayTask;
+        mTask = oneDayTask;
         initTaskData();
     }
 
@@ -99,6 +104,11 @@ public class TodoOnedayViewHolder extends AbstractTodoViewHolder{
 
         endTime.setText(time);
         taskName.setText(mTask.getName());
+    }
+
+
+    public void close(){
+        mSwipeLayout.close();
     }
 
 }
