@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.activity.AboutActivity;
+import hongzicong.saltedfish.activity.LoginActivity;
 import hongzicong.saltedfish.activity.SaltedFishFlagActivity;
 import hongzicong.saltedfish.activity.SaltedFishSquareActivity;
 import hongzicong.saltedfish.activity.SettingActivity;
 import hongzicong.saltedfish.activity.PersonalInfoActivity;
+import hongzicong.saltedfish.model.PersonalInfo;
 import hongzicong.saltedfish.utils.UIUtils;
 import hongzicong.saltedfish.viewholder.SettingAvatarViewHolder;
 import hongzicong.saltedfish.viewholder.SettingIconViewHolder;
@@ -27,7 +29,8 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
         if(viewType == 0){
             View itemView=layoutInflater.inflate(R.layout.item_avatar_setting,parent,false);
-            return new SettingAvatarViewHolder(itemView,"啦啦啦啦啦啦",R.drawable.test_avatar);
+            return new SettingAvatarViewHolder(itemView,
+                    PersonalInfo.getPersonalInfo());
         }
         else if(viewType == 1){
             View itemView=layoutInflater.inflate(R.layout.item_icon_setting,parent,false);
@@ -55,8 +58,13 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(UIUtils.getContext(), PersonalInfoActivity.class);
-                    UIUtils.getContext().startActivity(intent);
+                    if(PersonalInfo.getPersonalInfo().isLogin()){
+                        Intent intent=new Intent(UIUtils.getContext(), PersonalInfoActivity.class);
+                        UIUtils.getContext().startActivity(intent);
+                    } else{
+                        Intent intent=new Intent(UIUtils.getContext(), LoginActivity.class);
+                        UIUtils.getContext().startActivity(intent);
+                    }
                 }
             });
         } else if(position == 1){

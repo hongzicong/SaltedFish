@@ -5,8 +5,10 @@ package hongzicong.saltedfish.utils;
  */
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,20 +64,14 @@ public class UIUtils {
         return getContext().getPackageName();
     }
 
-    public static int dip2px(int dip) {
-        float scale = getResources().getDisplayMetrics().density;
-        return (int) (dip * scale + .5f);
-    }
 
-    public static int dx2dip(int px) {
-        float scale = getResources().getDisplayMetrics().density;
-        return (int) (px / scale + .5f);
-    }
-
-    public static int getScreenWidth() {
-        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        int width = wm.getDefaultDisplay().getWidth();
-        return width;
+    public Uri getUriFromDrawableRes(Context context, int id) {
+        Resources resources = context.getResources();
+        String path = ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
+                + resources.getResourcePackageName(id) + "/"
+                + resources.getResourceTypeName(id) + "/"
+                + resources.getResourceEntryName(id);
+        return Uri.parse(path);
     }
 
 }
