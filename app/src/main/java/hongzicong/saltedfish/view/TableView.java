@@ -33,7 +33,7 @@ public class TableView extends View {
     private int rightTextPadding=130;
     private int leftTextPadding=40;
     private int topTextPadding=140;
-    private int bottomTextPadding=180;
+    private int bottomTextPadding=50;
     private RectF rectF;
 
     private Paint paintEmpty = new Paint();
@@ -87,7 +87,7 @@ public class TableView extends View {
             column = mAdapter.getColumnCount();
         }
         int measureWidth = (column == 0 ? 0 : column * (itemWidth + itemSpace) - itemSpace) + getPaddingLeft() + getPaddingRight()+leftTextPadding+rightTextPadding;
-        int measureHeight = (row == 0 ? 0 : row * (itemHeight + itemSpace) - itemSpace) + getPaddingTop() + getPaddingBottom()+topTextPadding+bottomTextPadding;
+        int measureHeight = (row == 0 ? 0 : row * (itemHeight + itemSpace) - itemSpace) + getPaddingTop() + getPaddingBottom() + topTextPadding + bottomTextPadding;
 
         int mWidth = widthMode == MeasureSpec.EXACTLY ? MeasureSpec.getSize(widthMeasureSpec) : measureWidth;
         int mHeight = heightMode == MeasureSpec.EXACTLY ? MeasureSpec.getSize(heightMeasureSpec) : measureHeight;
@@ -97,8 +97,10 @@ public class TableView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
         //裁剪画布
         canvas.clipRect(getPaddingLeft(), getPaddingTop(), getRight()- getPaddingRight(), getBottom() - getPaddingBottom());
+
         //pixel 为单位
         if (mAdapter != null) {
             final int columnCount = mAdapter.getColumnCount();
@@ -119,39 +121,39 @@ public class TableView extends View {
             paintText.setAntiAlias(true);
             paintText.setTextAlign(Paint.Align.RIGHT);
             paintText.setColor(ContextCompat.getColor(getContext(),R.color.month_text));
-            drawText(canvas,"Jan",paintText,rightTextPadding-30,getPaddingTop()+topTextPadding+monthSize+5);
+            drawText(canvas,"Jan",paintText,rightTextPadding-40,getPaddingTop()+topTextPadding+monthSize+2*(itemHeight + itemSpace)+5);
             if(currDay>334) {
-                drawText(canvas, "Dec", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+44*(itemHeight + itemSpace)+5);
+                drawText(canvas, "Dec", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 49 * (itemHeight + itemSpace)+5);
             }
             if(currDay>304){
-                drawText(canvas, "Nov", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+40*(itemHeight + itemSpace)+5);
+                drawText(canvas, "Nov", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 45 * (itemHeight + itemSpace)+5);
             }
             if(currDay>273){
-                drawText(canvas, "Oct", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+36*(itemHeight + itemSpace)+5);
+                drawText(canvas, "Oct", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 41 * (itemHeight + itemSpace)+5);
             }
             if(currDay>243){
-                drawText(canvas, "Sep", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+32*(itemHeight + itemSpace)+5);
+                drawText(canvas, "Sep", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 36 * (itemHeight + itemSpace)+5);
             }
             if(currDay>212){
-                drawText(canvas, "Aug", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+28*(itemHeight + itemSpace)+5);
+                drawText(canvas, "Aug", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 32 * (itemHeight + itemSpace)+5);
             }
             if(currDay>181){
-                drawText(canvas, "Jul", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+24*(itemHeight + itemSpace)+5);
+                drawText(canvas, "Jul", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 27 * (itemHeight + itemSpace)+5);
             }
             if(currDay>151){
-                drawText(canvas, "Jun", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+20*(itemHeight + itemSpace)+5);
+                drawText(canvas, "Jun", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 23 * (itemHeight + itemSpace)+5);
             }
             if(currDay>120){
-                drawText(canvas, "May", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+16*(itemHeight + itemSpace)+5);
+                drawText(canvas, "May", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 19 * (itemHeight + itemSpace)+5);
             }
             if(currDay>90){
-                drawText(canvas, "Apr", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+12*(itemHeight + itemSpace)+5 );
+                drawText(canvas, "Apr", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 14 * (itemHeight + itemSpace)+5);
             }
             if(currDay>59){
-                drawText(canvas, "Mar", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+8*(itemHeight + itemSpace)+5);
+                drawText(canvas, "Mar", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 10 * (itemHeight + itemSpace)+5);
             }
             if(currDay>31){
-                drawText(canvas, "Feb", paintText,rightTextPadding-30 , getPaddingTop() + topTextPadding + monthSize+4*(itemHeight + itemSpace)+5);
+                drawText(canvas, "Feb", paintText,rightTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 6 * (itemHeight + itemSpace)+5);
             }
 
             int tempDay=0;
@@ -200,8 +202,8 @@ public class TableView extends View {
         canvas.drawCircle((rectF.left + rectF.right) / 2,(rectF.top + rectF.bottom) / 2, Math.min(itemWidth, itemHeight) / 2, paintByLevel);
     }
 
-    private void drawText(Canvas canvas,String text,Paint paint,final float x,final float y){
-        canvas.drawText(text,x,y,paint);
+    private void drawText(Canvas canvas, String text, Paint paint, final float x, final float y){
+        canvas.drawText(text, x, y, paint);
     }
 
     public void setAdapter(TableViewAdapter adapter) {
