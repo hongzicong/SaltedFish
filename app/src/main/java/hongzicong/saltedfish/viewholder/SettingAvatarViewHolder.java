@@ -28,7 +28,7 @@ public class SettingAvatarViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this,itemView);
 
         if(!personalInfo.isLogin()){
-            nameTextView.setText("未登录");
+            nameTextView.setText("未登陆");
             avatarImageView.setImageResource(R.drawable.default_avatar);
         } else{
             nameTextView.setText(personalInfo.getName());
