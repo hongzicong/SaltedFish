@@ -44,7 +44,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private OnUpdateBackgroundListener onUpdateBackgroundListener;
 
     public interface OnUpdateBackgroundListener{
-        public void updateFragmentBackground();
+        void updateFragmentBackground();
     }
 
     public void setUpdateBackground(OnUpdateBackgroundListener onUpdateBackgroundListener){
@@ -111,7 +111,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((TodoEverydayViewHolder) holder).setOnCompleteListener(new TodoEverydayViewHolder.OnCompleteListener() {
                 @Override
                 public void completeTask() {
-                    boolean isComplete=mEverydayTaskList.get(position-mOnedayTaskList.size()-2).getIsComplete();
+                    boolean isComplete = mEverydayTaskList.get(position-mOnedayTaskList.size()-2).getIsComplete();
                     mEverydayTaskList.get(position-mOnedayTaskList.size()-2).setIsComplete(!isComplete);
                     everyDayDaoUtil.updateEveryDayTask(mEverydayTaskList.get(position-mOnedayTaskList.size()-2));
                     ((TodoEverydayViewHolder) holder).close();

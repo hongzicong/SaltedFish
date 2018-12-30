@@ -33,10 +33,7 @@ public class AddTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private AddTextViewHolder mAddDetailViewHolder;
     private AddDateViewHolder mAddDateViewHolder;
 
-    private Context mContext;
-
     public AddTaskAdapter(Activity activity){
-        mContext=activity;
         fragmentManager=activity.getFragmentManager();
     }
 
@@ -92,7 +89,7 @@ public class AddTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
     public long addInToDB(){
-        OneDayTask oneDayTask=getTaskFromViewHolder();
+        OneDayTask oneDayTask = getTaskFromViewHolder();
         oneDayDaoUtil.insertOneDayTask(oneDayTask);
         return oneDayTask.getId();
     }

@@ -9,9 +9,11 @@ import hongzicong.saltedfish.model.DateDatas;
 public class TableViewAdapter {
 
     private DateDatas mDateDatas;
-    private int columnCount;
-    private int rowCount;
     private int currentDay;
+
+    public TableViewAdapter(DateDatas dateDatas){
+        this.mDateDatas=dateDatas;
+    }
 
     //日期从1开始
     public int getCurrentDay() {
@@ -21,10 +23,6 @@ public class TableViewAdapter {
     //每天更新一次
     public void setCurrentDay(int currentDay) {
         this.currentDay = currentDay;
-    }
-
-    public TableViewAdapter(DateDatas dateDatas){
-        this.mDateDatas=dateDatas;
     }
 
     public int getColumnCount(){

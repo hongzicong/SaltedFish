@@ -34,10 +34,7 @@ public class AddHabitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private AddDateViewHolder mAddDateViewHolder;
     private AddNumViewHolder mAddNumViewHolder;
 
-    private Context mContext;
-
     public AddHabitAdapter(Activity activity){
-        mContext=activity;
         fragmentManager=activity.getFragmentManager();
     }
 

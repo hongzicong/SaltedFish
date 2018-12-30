@@ -27,9 +27,6 @@ import static hongzicong.saltedfish.utils.Util.getTotalDayNum;
 
 public class ShowFragment extends Fragment {
 
-    private EveryDayDaoUtil everyDayDaoUtil=new EveryDayDaoUtil(UIUtils.getContext());
-    private OneDayDaoUtil oneDayDaoUtil=new OneDayDaoUtil(UIUtils.getContext());
-
     private int totalDayNum;
     private DateDatas dateDatas;
 
@@ -82,7 +79,7 @@ public class ShowFragment extends Fragment {
     private void initLayout(){
 
         totalDayNum = getTotalDayNum();
-        dateDatas = new DateDatas(totalDayNum,everyDayDaoUtil.queryAllEveryDayTask(),oneDayDaoUtil.queryAllOneDayTask());
+        dateDatas = new DateDatas();
 
         totalDay.setText(totalDayNum+" days");
         totalNum.setText(dateDatas.getTotalNum()+" total");

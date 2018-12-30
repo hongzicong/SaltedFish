@@ -79,6 +79,10 @@ public class EveryDayTask extends Task{
 
     public void setIsComplete(boolean isComplete) {
         this.isComplete = isComplete;
+        Calendar calendarBegin = Calendar.getInstance();
+        calendarBegin.setTimeInMillis(mBeginTime);
+        Calendar calendarCurr = Calendar.getInstance();
+        keepClockList.set(calendarCurr.get(Calendar.DATE) - calendarBegin.get(Calendar.DATE), isComplete);
     }
 
     public String getName() {

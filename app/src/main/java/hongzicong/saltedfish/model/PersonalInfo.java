@@ -3,6 +3,7 @@ package hongzicong.saltedfish.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import hongzicong.saltedfish.utils.SharedPreferencesUtils;
 import hongzicong.saltedfish.utils.UIUtils;
 
 public class PersonalInfo {
@@ -54,13 +55,21 @@ public class PersonalInfo {
 
     public static PersonalInfo getPersonalInfo(){
         if(personalInfo == null){
-            SharedPreferences sharedPreferences = UIUtils.getContext().getSharedPreferences("PERSONAL_INFO", Context.MODE_PRIVATE);
-            personalInfo = new PersonalInfo(sharedPreferences.getString("name",""),
-                    sharedPreferences.getString("gender",""),
-                    sharedPreferences.getString("avatar",""));
+            personalInfo = new PersonalInfo(SharedPreferencesUtils.getInstance().getString("name",""),
+                    SharedPreferencesUtils.getInstance().getString("gender",""),
+                    SharedPreferencesUtils.getInstance().getString("avatar",""));
             personalInfo.login = !personalInfo.getName().equals("");
         }
         return personalInfo;
+    }
+
+    public static void loadPersonInfo(String name, String avatar, String gender){
+        SharedPreferencesUtils.getInstance().putString("name", name);
+        SharedPreferencesUtils.getInstance().putString("gender", gender);
+        SharedPreferencesUtils.getInstance().putString("avatar", avatar);
+        getPersonalInfo().setName(name);
+        getPersonalInfo().setName(gender);
+        getPersonalInfo().setName(avatar);
     }
 
 }
