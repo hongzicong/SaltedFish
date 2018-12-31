@@ -17,12 +17,27 @@
     <color name="background">#EBEBEB</color>
 
     <color name="empty_contri">#E1DFCE</color>
-    <color name="fill_1_contri">#81C7D4</color>
-    <color name="fill_2_contri">#7DB9DE</color>
-    <color name="fill_3_contri">#58B2DC</color>
-    <color name="fill_4_contri">#2EA9DF</color>
-    <color name="fill_5_contri">#3A8FB7</color>
-    <color name="fill_6_contri">#1E88A8</color>
+
+    <color name="fill_1_blue">#81C7D4</color>
+    <color name="fill_2_blue">#7DB9DE</color>
+    <color name="fill_3_blue">#58B2DC</color>
+    <color name="fill_4_blue">#2EA9DF</color>
+    <color name="fill_5_blue">#3A8FB7</color>
+    <color name="fill_6_blue">#1E88A8</color>
+
+    <color name="fill_1_red">#F8C3CD</color>
+    <color name="fill_2_red">#EEA9A9</color>
+    <color name="fill_3_red">#F596AA</color>
+    <color name="fill_4_red">#EB7A77</color>
+    <color name="fill_5_red">#E16B8C</color>
+    <color name="fill_6_red">#D0104C</color>
+
+    <color name="fill_1_purple">#B28FCE</color>
+    <color name="fill_2_purple">#B481BB</color>
+    <color name="fill_3_purple">#986DB2</color>
+    <color name="fill_4_purple">#77428D</color>
+    <color name="fill_5_purple">#66327C</color>
+    <color name="fill_6_purple">#4A225D</color>
 
     <color name="week_text">#828282</color>
     <color name="month_text">#828282</color>
