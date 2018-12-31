@@ -1,6 +1,7 @@
 package hongzicong.saltedfish.adapter;
 
 import hongzicong.saltedfish.model.DateDatas;
+import hongzicong.saltedfish.utils.Util;
 
 /**
  * Created by DELL-PC on 2017/12/31.
@@ -30,7 +31,7 @@ public class TableViewAdapter {
     }
 
     public int getRowCount(){
-        return currentDay/7+1;
+        return Util.getTotalDayNum() /7+1;
     }
 
     public int getLevel(int day){
