@@ -32,15 +32,15 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/round_button_register"
         android:text="登陆"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/radio_button"/>
 
     <Button
         android:id="@+id/change_button"
@@ -98,6 +98,18 @@
             android:textColor="@android:color/white" />
 
     </LinearLayout>
+
+    <RadioButton
+        android:id="@+id/radio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:buttonTint="@android:color/white"
+        android:text="自动登陆"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/linear_layout"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout"/>
 
 
     <LinearLayout

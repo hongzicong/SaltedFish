@@ -34,12 +34,15 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar">
+        android:layout_below="@id/toolbar"
+        android:scrollbars="none">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            android:elevation="5dp"
+            android:layout_margin="10dp">
 
             <hongzicong.saltedfish.view.TableView
                 android:id="@+id/table_view"

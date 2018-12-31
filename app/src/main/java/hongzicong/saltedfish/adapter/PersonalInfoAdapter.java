@@ -12,23 +12,20 @@ import hongzicong.saltedfish.viewholder.EditViewHolder;
 
 
 public class PersonalInfoAdapter extends RecyclerView.Adapter {
-
-    private PersonalInfo mPersonalInfo = PersonalInfo.getPersonalInfo();
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater= LayoutInflater.from(parent.getContext());
         if(viewType==0){
             View itemView=layoutInflater.inflate(R.layout.item_avatar_edit,parent,false);
-            return new EditAvatarViewHolder(itemView,mPersonalInfo.getAvatar());
+            return new EditAvatarViewHolder(itemView,PersonalInfo.getAvatar());
         }
         else if(viewType==1){
             View itemView=layoutInflater.inflate(R.layout.item_setting_edit,parent,false);
-            return new EditViewHolder(itemView, "名字", mPersonalInfo.getName());
+            return new EditViewHolder(itemView, "名字", PersonalInfo.getName());
         }
         else if(viewType==2){
             View itemView=layoutInflater.inflate(R.layout.item_setting_edit,parent,false);
-            return new EditViewHolder(itemView, "性别", mPersonalInfo.getGender());
+            return new EditViewHolder(itemView, "性别", PersonalInfo.getGender());
         }
         return null;
     }
