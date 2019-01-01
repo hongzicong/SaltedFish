@@ -45,4 +45,9 @@
 
     <color name="black_semi_transparent">#B2000000</color>
 
+    <color name="konfetti_1">#A5DEE4</color>
+    <color name="konfetti_2">#8F77B5</color>
+    <color name="konfetti_3">#FAD689</color>
+    <color name="konfetti_4">#EB7A77</color>
+
 </resources>

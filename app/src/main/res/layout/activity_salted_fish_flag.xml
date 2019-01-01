@@ -46,6 +46,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:background="@drawable/book_background"></android.support.v7.widget.RecyclerView>
+        android:background="@drawable/book_background"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/new_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/add_flag"
+        app:fab_colorNormal="#DB4D6D"
+        app:fab_colorPressed="#D0104C"
+        app:fab_colorRipple="#DB4D6D"/>
+
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/delete_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cancel_flag"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        app:fab_colorNormal="#828282"
+        app:fab_colorPressed="#787878"
+        app:fab_colorRipple="#707C74"/>
+
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar" />
 
 </RelativeLayout>
