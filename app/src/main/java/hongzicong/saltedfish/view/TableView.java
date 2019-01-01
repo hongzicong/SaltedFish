@@ -154,39 +154,41 @@ public class TableView extends View {
             paintText.setAntiAlias(true);
             paintText.setTextAlign(Paint.Align.RIGHT);
             paintText.setColor(ContextCompat.getColor(getContext(),R.color.month_text));
-            drawText(canvas,"Jan",paintText,leftTextPadding-40,getPaddingTop()+topTextPadding+monthSize+2*(itemHeight + itemSpace)+5);
-            if(currDay>334) {
+            if(currDay>343) {
                 drawText(canvas, "Dec", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 49 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>304){
+            if(currDay>315){
                 drawText(canvas, "Nov", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 45 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>273){
+            if(currDay>287){
                 drawText(canvas, "Oct", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 41 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>243){
+            if(currDay>252){
                 drawText(canvas, "Sep", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 36 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>212){
+            if(currDay>224){
                 drawText(canvas, "Aug", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 32 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>181){
+            if(currDay>189){
                 drawText(canvas, "Jul", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 27 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>151){
+            if(currDay>161){
                 drawText(canvas, "Jun", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 23 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>120){
+            if(currDay>133){
                 drawText(canvas, "May", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 19 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>90){
+            if(currDay>98){
                 drawText(canvas, "Apr", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 14 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>59){
+            if(currDay>70){
                 drawText(canvas, "Mar", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 10 * (itemHeight + itemSpace)+5);
             }
-            if(currDay>31){
+            if(currDay>42){
                 drawText(canvas, "Feb", paintText,leftTextPadding-40 , getPaddingTop() + topTextPadding + monthSize + 6 * (itemHeight + itemSpace)+5);
+            }
+            if(currDay>14){
+                drawText(canvas,"Jan",paintText,leftTextPadding-40,getPaddingTop()+topTextPadding+monthSize+2*(itemHeight + itemSpace)+5);
             }
 
             int tempDay=0;

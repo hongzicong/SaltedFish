@@ -1,8 +1,5 @@
 package hongzicong.saltedfish.activity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,7 +45,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static hongzicong.saltedfish.model.PersonalInfo.loadPersonInfo;
 import static hongzicong.saltedfish.utils.Util.isValidName;
 
 public class LoginRegisterActivity extends AppCompatActivity {
