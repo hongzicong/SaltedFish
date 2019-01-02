@@ -40,4 +40,11 @@
 
     </RelativeLayout>
 
+
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar" />
+
 </android.support.design.widget.CoordinatorLayout>
