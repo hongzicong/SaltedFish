@@ -1,5 +1,6 @@
 package hongzicong.saltedfish.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -76,26 +77,16 @@ public class SaltedFishFlagActivity extends AppCompatActivity {
         deleteFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // TODO
+                SharedPreferencesUtils.getInstance().putBoolean("has_flag", false);
             }
         });
 
         newFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mKonfettiView.build()
-                        .addColors(UIUtils.getColor(R.color.konfetti_1),
-                                UIUtils.getColor(R.color.konfetti_2),
-                                UIUtils.getColor(R.color.konfetti_3),
-                                UIUtils.getColor(R.color.konfetti_4))
-                        .setDirection(0.0, 359.0)
-                        .setSpeed(1f, 5f)
-                        .setFadeOutEnabled(true)
-                        .setTimeToLive(1500L)
-                        .addShapes(Shape.RECT, Shape.CIRCLE)
-                        .addSizes(new Size(12, 5))
-                        .setPosition(-50f, mKonfettiView.getWidth() + 50f, -50f, -50f)
-                        .streamFor(300, 5000L);
+                Intent intent = new Intent(SaltedFishFlagActivity.this, NewFlagActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
     }
@@ -119,5 +110,27 @@ public class SaltedFishFlagActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == 2){
+                mKonfettiView.build()
+                        .addColors(UIUtils.getColor(R.color.konfetti_1),
+                                UIUtils.getColor(R.color.konfetti_2),
+                                UIUtils.getColor(R.color.konfetti_3),
+                                UIUtils.getColor(R.color.konfetti_4))
+                        .setDirection(0.0, 359.0)
+                        .setSpeed(1f, 5f)
+                        .setFadeOutEnabled(true)
+                        .setTimeToLive(2000L)
+                        .addShapes(Shape.RECT, Shape.CIRCLE)
+                        .addSizes(new Size(12, 5))
+                        .setPosition(-50f, mKonfettiView.getWidth() + 50f, -50f, -50f)
+                        .streamFor(300, 5000L);
+            }
+        }
     }
 }
