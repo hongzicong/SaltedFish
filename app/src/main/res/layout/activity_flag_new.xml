@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hongzicong.saltedfish.activity.AboutActivity"
+    tools:context="hongzicong.saltedfish.activity.NewFlagActivity"
     android:background="@drawable/book_background"
     android:orientation="vertical">
 
@@ -31,6 +31,8 @@
 
 
     </android.support.v7.widget.Toolbar>
+
+
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/prob_title"
@@ -78,7 +80,7 @@
         android:textColor="@android:color/black"
         android:textSize="24dp"
         android:hint="1. Bed early..."
-        android:gravity="left|top"
+        android:gravity="start|top"
         android:layout_marginStart="58dp"
         android:background="#00000000"/>
 
@@ -128,7 +130,7 @@
         android:textColor="@android:color/black"
         android:textSize="24dp"
         android:hint="1. + 15KG..."
-        android:gravity="left|top"
+        android:gravity="start|top"
         android:layout_marginStart="58dp"
         android:background="#00000000"/>
 

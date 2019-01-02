@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import hongzicong.saltedfish.R;
 import hongzicong.saltedfish.utils.SharedPreferencesUtils;
+import hongzicong.saltedfish.utils.UIUtils;
 
 public class NewFlagActivity extends AppCompatActivity {
 
@@ -29,36 +31,28 @@ public class NewFlagActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_flag);
+        setContentView(R.layout.activity_flag_new);
         ButterKnife.bind(this);
 
         initToolBar();
 
     }
 
-    private boolean isLegal(){
-        return true;
-    }
 
-    private boolean addInDB(){
-        if(isLegal()){
-            // TODO
-            String probText = probEditText.getText().toString();
-            String likeText = likelyEditText.getText().toString();
-            String probTextArr[] = probText.split("\n");
-            String likeTextArr[] = likeText.split("\n");
-            ArrayList<String> probArr = new ArrayList<>();
-            ArrayList<String> likeArr = new ArrayList<>();
-            for(String prob:probTextArr){
-                //probArr.add(prob)
-            }
-            for(String likely:likeTextArr){
+    private boolean addInSharedPreferences(){
+        String probText = probEditText.getText().toString();
+        String likeText = likelyEditText.getText().toString();
 
-            }
-
-            return true;
+        if(probText.equals("") || likeText.equals("")){
+            Toast.makeText(UIUtils.getContext(), "空的Flag怎么能立起来呢？", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        return false;
+
+        SharedPreferencesUtils.getInstance().putString("prob_flag", probText);
+
+        SharedPreferencesUtils.getInstance().putString("likely_flag", likeText);
+
+        return true;
     }
 
     protected void initToolBar(){
@@ -85,7 +79,7 @@ public class NewFlagActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_ok:
-                if(addInDB()){
+                if(addInSharedPreferences()){
                     intent=new Intent();
                     this.setResult(2,intent);
                     SharedPreferencesUtils.getInstance().putBoolean("has_flag", true);

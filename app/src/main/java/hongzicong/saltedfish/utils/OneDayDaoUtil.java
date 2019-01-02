@@ -14,10 +14,6 @@ import hongzicong.saltedfish.db.DBManager;
 import hongzicong.saltedfish.model.EveryDayTask;
 import hongzicong.saltedfish.model.OneDayTask;
 
-/**
- * Created by Dv00 on 2018/1/5.
- */
-
 public class OneDayDaoUtil {
 
     private static final String TAG = OneDayDaoUtil.class.getSimpleName();
