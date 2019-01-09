@@ -10,9 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.cazaea.sweetalert.SweetAlertDialog;
 import com.github.clans.fab.FloatingActionButton;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,10 +80,28 @@ public class SaltedFishFlagActivity extends AppCompatActivity {
         deleteFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferencesUtils.getInstance().putBoolean("has_flag", false);
-                SharedPreferencesUtils.getInstance().putString("prob_flag", "");
-                SharedPreferencesUtils.getInstance().putString("likely_flag", "");
-                updateLayout();
+
+                new SweetAlertDialog(SaltedFishFlagActivity.this, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("这些Flag要被你删除了")
+                        .setContentText("这个操作是无法恢复的！")
+                        .setConfirmText("一意孤行")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.setTitleText("删除")
+                                        .setContentText("已被删除成功！")
+                                        .setConfirmText("真香")
+                                        .setConfirmClickListener(null)
+                                        .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+
+                                SharedPreferencesUtils.getInstance().putBoolean("has_flag", false);
+                                SharedPreferencesUtils.getInstance().putString("prob_flag", "");
+                                SharedPreferencesUtils.getInstance().putString("likely_flag", "");
+                                updateLayout();
+                            }
+                        })
+                        .show();
+
             }
         });
 
